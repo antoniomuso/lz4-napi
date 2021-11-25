@@ -1,0 +1,25 @@
+[package]
+authors = ["antoniomuso <antoniomusolino007@gmail.com>"]
+edition = "2021"
+name = "lz4"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = "1"
+napi-derive = "1"
+lz4_flex = { version = "0.9.0" }
+
+[target.'cfg(all(any(windows, unix), target_arch = "x86_64", not(target_env = "musl")))'.dependencies]
+mimalloc = {version = "0.1"}
+
+[build-dependencies]
+napi-build = "1"
+
+[profile.release]
+lto = true
+codgen-units = 1
