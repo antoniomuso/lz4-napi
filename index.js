@@ -8,4 +8,25 @@ const { loadBinding } = require('@node-rs/helper')
  * loadBinding helper will load `package-template.[PLATFORM].node` from `__dirname` first
  * If failed to load addon, it will fallback to load from `@napi-rs/package-template-[PLATFORM]`
  */
-module.exports = loadBinding(__dirname, 'package-template', '@napi-rs/package-template')
+const {
+  compress: _compress,
+  uncompress: _uncompress,
+  compress_sync,
+  uncompress_sync,
+} = loadBinding(__dirname, 'package-template', '@napi-rs/package-template')
+
+module.exports.compress = function compress(data) {
+  return _compress(Buffer.isBuffer(data) ? data : Buffer.from(data))
+}
+
+module.exports.compressSync = function compressSync(data) {
+  return compress_sync(Buffer.isBuffer(data) ? data : Buffer.from(data))
+}
+
+module.exports.uncompress = function uncompress(data) {
+  return _uncompress(Buffer.isBuffer(data) ? data : Buffer.from(data))
+}
+
+module.exports.uncompressSync = function uncompressSync(data) {
+  return uncompress_sync(Buffer.isBuffer(data) ? data : Buffer.from(data))
+}

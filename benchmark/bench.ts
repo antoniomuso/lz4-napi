@@ -1,6 +1,6 @@
 import b from 'benny'
 
-import { sync } from '../index'
+import { uncompress, compress, } from '../index'
 
 function add(a: number) {
   return a + 100

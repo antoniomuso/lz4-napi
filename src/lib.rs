@@ -70,9 +70,9 @@ impl Task for Dec {
 #[module_exports]
 fn init(mut exports: JsObject) -> Result<()> {
   exports.create_named_method("compress", compress_data)?;
-  exports.create_named_method("decompress", decompress_data)?;
+  exports.create_named_method("uncompress", uncompress_data)?;
   exports.create_named_method("compress_sync", compress_data_sync)?;
-  exports.create_named_method("decompress_sync", decompress_data_sync)?;
+  exports.create_named_method("uncompress_sync", uncompress_data_sync)?;
   Ok(())
 }
 
@@ -86,7 +86,7 @@ fn compress_data(ctx: CallContext) -> Result<JsObject> {
 }
 
 #[js_function(1)]
-fn decompress_data(ctx: CallContext) -> Result<JsObject> {
+fn uncompress_data(ctx: CallContext) -> Result<JsObject> {
   let data = ctx.get::<JsBuffer>(0)?;
   let decoder = Dec {
     data: data.into_ref()?,
@@ -95,7 +95,7 @@ fn decompress_data(ctx: CallContext) -> Result<JsObject> {
 }
 
 #[js_function(1)]
-fn decompress_data_sync(ctx: CallContext) -> Result<JsUnknown> {
+fn uncompress_data_sync(ctx: CallContext) -> Result<JsUnknown> {
   let data = ctx.get::<JsBuffer>(0)?;
   decompress_size_prepended(&data.into_value()?)
     .map_err(|e| Error::new(napi::Status::GenericFailure, format!("{}", e)))
