@@ -1,5 +1,5 @@
 {
-  "name": "@napi-rs/package-template",
+  "name": "napi-lz4",
   "version": "1.0.0",
   "description": "Template project for writing node package with napi-rs",
   "main": "index.js",
