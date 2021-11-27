@@ -5,8 +5,7 @@ extern crate napi_derive;
 
 use lz4_flex::{compress_prepend_size, decompress_size_prepended};
 use napi::{
-  CallContext, Env, Error, JsBuffer, JsBufferValue, JsObject, JsUnknown, Ref, Result,
-  Status, Task,
+  CallContext, Env, Error, JsBuffer, JsBufferValue, JsObject, JsUnknown, Ref, Result, Status, Task,
 };
 
 #[cfg(all(
@@ -99,7 +98,12 @@ fn uncompress_data_sync(ctx: CallContext) -> Result<JsUnknown> {
   let data = ctx.get::<JsBuffer>(0)?;
   decompress_size_prepended(&data.into_value()?)
     .map_err(|e| Error::new(napi::Status::GenericFailure, format!("{}", e)))
-    .and_then(|d| ctx.env.create_buffer_with_data(d).map(|b| b.into_raw().into_unknown()))
+    .and_then(|d| {
+      ctx
+        .env
+        .create_buffer_with_data(d)
+        .map(|b| b.into_raw().into_unknown())
+    })
 }
 
 #[js_function(1)]
