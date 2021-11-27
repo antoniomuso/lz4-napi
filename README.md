@@ -5,7 +5,7 @@ Fastest lz4 compression library in Node.js, powered by [napi-rs](https://napi.rs
 ## Install this package
 
 ```bash
-yarn add napi-lz4
+yarn add lz4-napi
 ```
 
 ## API 

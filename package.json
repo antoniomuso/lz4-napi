@@ -1,9 +1,9 @@
 {
-  "name": "napi-lz4",
+  "name": "lz4-napi",
   "version": "1.0.0",
-  "description": "Template project for writing node package with napi-rs",
+  "description": "Fastest lz4 compression library in Node.js, powered by napi-rs and lz4-flex.",
   "main": "index.js",
-  "repository": "git@github.com:napi-rs/package-template.git",
+  "repository": "git@github.com:antoniomuso/lz4-napi.git",
   "license": "MIT",
   "keywords": [
     "napi-rs",
@@ -20,7 +20,7 @@
     "index.js"
   ],
   "napi": {
-    "name": "package-template",
+    "name": "lz4-napi",
     "triples": {
       "defaults": true,
       "additional": [
@@ -55,9 +55,10 @@
     "format:source": "prettier --config ./package.json --write './**/*.{js,ts}'",
     "format:yaml": "prettier --parser yaml --write './**/*.{yml,yaml}'",
     "lint": "eslint . -c ./.eslintrc.yml './**/*.{ts,tsx,js}'",
-    "prepublishOnly": "napi prepublish -t npm",
+    "prepublishOnly": "napi prepublish -t npm && node ./rename-optional-deps.js",
     "test": "ava",
-    "version": "napi version"
+    "test:mem": "node ./memory-leak-detect.js",
+    "version": "napi version && conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "devDependencies": {
     "@napi-rs/cli": "^1.3.4",
@@ -68,6 +69,14 @@
     "ava": "^3.15.0",
     "benny": "^3.7.1",
     "chalk": "^4.1.2",
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/commit-analyzer": "^9.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.2",
+    "@semantic-release/npm": "^8.0.3",
+    "@semantic-release/release-notes-generator": "^10.0.2",
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",
@@ -78,6 +87,8 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.4.1",
     "snappy": "^7.0.5",
+    "table": "^6.7.1",
+    "pretty-bytes": "^5.6.0",
     "typescript": "^4.4.4"
   },
   "dependencies": {
