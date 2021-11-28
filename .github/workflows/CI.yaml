@@ -35,7 +35,6 @@ jobs:
               export CARGO_PROFILE_RELEASE_LTO=false
               yarn build --target i686-pc-windows-msvc
               yarn test
-              yarn test:mem
             target: "i686-pc-windows-msvc"
             setup: |
               choco install nodejs-lts --x86 -y --force --pre
@@ -205,7 +204,6 @@ jobs:
             yarn build
             strip -x lz4-napi.freebsd-x64.node
             yarn test
-            yarn test:mem
             rm -rf node_modules
             rm -rf target
       - name: Upload artifact
@@ -260,9 +258,6 @@ jobs:
       - name: Test bindings
         run: yarn test
 
-      - name: Memory leak detect
-        run: yarn test:mem
-
   test-linux-x64-gnu-binding:
     name: Test bindings on Linux-x64-gnu - node@${{ matrix.node }}
     needs:
@@ -304,9 +299,6 @@ jobs:
       - name: Test bindings
         run: docker run --rm -v $(pwd):/lz4-napi -w /lz4-napi node:${{ matrix.node }}-slim yarn test
 
-      - name: Memory leak detect
-        run: docker run --rm -v $(pwd):/lz4-napi -w /lz4-napi node:${{ matrix.node }}-slim yarn test:mem
-
   test-linux-x64-musl-binding:
     name: Test bindings on x86_64-unknown-linux-musl - node@${{ matrix.node }}
     needs:
@@ -347,9 +339,6 @@ jobs:
 
       - name: Test bindings
         run: docker run --rm -v $(pwd):/lz4-napi -w /lz4-napi node:${{ matrix.node }}-alpine yarn test
-
-      - name: Memory leak detect
-        run: docker run --rm -v $(pwd):/lz4-napi -w /lz4-napi node:${{ matrix.node }}-alpine yarn test:mem
 
   test-linux-aarch64-gnu-binding:
     name: Test bindings on aarch64-unknown-linux-gnu - node@${{ matrix.node }}

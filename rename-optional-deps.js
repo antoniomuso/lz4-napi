@@ -4,7 +4,7 @@ const { join } = require('path')
 const pkgJson = require('./package.json')
 
 pkgJson.optionalDependencies = Object.entries(pkgJson.optionalDependencies).reduce((acc, [name, value]) => {
-  acc[`@napi-rs/${name}`] = value
+  acc[`@antoniomuso/${name}`] = value
   return acc
 }, {})
 
