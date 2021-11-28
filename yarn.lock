@@ -244,9 +244,9 @@
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
 "@napi-rs/cli@^1.3.4":
-  version "1.3.4"
-  resolved "https://registry.npmjs.org/@napi-rs/cli/-/cli-1.3.4.tgz#67134173cf6d7ce4fe97ec26608702ae020242c9"
-  integrity sha512-a6JYMIArCLUkuOQCPlCPl+01tNkaBd48sfQ7ibH743Osh72ObIp58gMKYoXlol+5fPvh2aaNxOk7bhB6RM6gUQ==
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/@napi-rs/cli/-/cli-1.3.5.tgz#89e4d97127edc4ed10a06637a43d27a1ed3c288d"
+  integrity sha512-Z0KZIciemioYODTyO908v2AtL8Zg4sohQDD+dyHeHmOiOfaez/y/xQ8XnpOHc2W5fRidKUW+MVWyTtpLTbKsqw==
   dependencies:
     inquirer "^8.1.3"
 
