@@ -66,13 +66,13 @@ const { uncompress } = require('lz4-napi');
 
 // if you support top-level await
 const compressedBuffer = await getFromSomeStorage();
-const uncompressedBuffer = await compress(compressedBuffer)
+const uncompressedBuffer = await uncompress(compressedBuffer)
 // Do something with compressedBuffer!
 ```
 
 ## APIs
 
-### Promises
+### Promise
 
 #### `compress`
 
@@ -100,8 +100,6 @@ const uncompressedBuffer = await compress(compressedBuffer)
 (data: Buffer | string | ArrayBuffer | Uint8Array) => Buffer
 ```
 
-## Benchmarks
-
 ## Performance
 
 ### Hardware
@@ -113,7 +111,7 @@ Benchmarks runs on the following hardware:
 - Hyper-Threading Technology: Enabled
 - Memory: 32 GB
 
-### Results
+### Benchmark
 
 ```sh
 Running "Compress" suite...
@@ -175,9 +173,13 @@ Project is pretty simple and straight forward for what is my needs, but if you h
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+- [Brooooooklyn/snappy](https://github.com/Brooooooklyn/snappy) - Inspiration and project structure
+
 <!-- LICENSE -->
 
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
