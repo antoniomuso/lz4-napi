@@ -1,31 +1,6 @@
 # lz4-napi  
 
-<!-- toc -->
-
-- [About The Project](#about-the-project)
-- [Installation](#installation)
-- [Usage](#usage)
-  * [Compress](#compress)
-  * [Uncompress](#uncompress)
-- [APIs](#apis)
-  * [Promises](#promises)
-    + [`compress`](#compress)
-    + [`uncompress`](#uncompress)
-  * [Sync](#sync)
-    + [`compressSync`](#compresssync)
-    + [`uncompressSync`](#uncompresssync)
-- [Benchmarks](#benchmarks)
-- [Performance](#performance)
-  * [Hardware](#hardware)
-  * [Results](#results)
-- [Contributing](#contributing)
-- [License](#license)
-
-<!-- tocstop -->
-
-## About
-
-Node.js NAPI Binding for LZ4 compression algorithm, powered by Rust [napi-rs](https://napi.rs) and [lz4-flex](https://github.com/PSeitz/lz4_flex).
+> Node.js NAPI Binding for LZ4 compression algorithm, powered by Rust [napi-rs](https://napi.rs) and [lz4-flex](https://github.com/PSeitz/lz4_flex).
 
 **Pros:**
 
@@ -33,8 +8,31 @@ Node.js NAPI Binding for LZ4 compression algorithm, powered by Rust [napi-rs](ht
 - Memory Safe! 🔒
 - Uses libuv's threadpool! 🧵
 
-<!-- GETTING STARTED -->
+## Table of content
 
+<!-- toc -->
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Compress](#compress)
+  - [Uncompress](#uncompress)
+- [APIs](#apis)
+  - [Promises](#promises)
+    - [`compress`](#compress)
+    - [`uncompress`](#uncompress)
+  - [Sync](#sync)
+    - [`compressSync`](#compresssync)
+    - [`uncompressSync`](#uncompresssync)
+- [Benchmarks](#benchmarks)
+- [Performance](#performance)
+  - [Hardware](#hardware)
+  - [Results](#results)
+- [Contributing](#contributing)
+- [License](#license)
+
+<!-- tocstop -->
+
+<!-- GETTING STARTED -->
 ## Installation
 
 ```sh
