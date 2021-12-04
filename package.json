@@ -56,7 +56,7 @@
     "format:yaml": "prettier --parser yaml --write './**/*.{yml,yaml}'",
     "lint": "eslint . -c ./.eslintrc.yml './**/*.{ts,tsx,js}'",
     "prepublishOnly": "napi prepublish -t npm && node ./rename-optional-deps.js",
-    "test": "ava",
+    "test": "ava -s",
     "test:mem": "node ./memory-leak-detect.js",
     "version": "napi version && conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
