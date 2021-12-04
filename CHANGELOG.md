@@ -1,3 +1,12 @@
+## [1.0.2](https://github.com/antoniomuso/lz4-napi/compare/v1.0.1...v1.0.2) (2021-12-04)
+
+
+### Bug Fixes
+
+* **type:** removed string from uncompress input type ([b7fc2ca](https://github.com/antoniomuso/lz4-napi/commit/b7fc2cacd9b8664006105d4417c04fb6a1103a17))
+
+
+
 # 1.0.1 (2021-11-27)
 
 
