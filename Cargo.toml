@@ -10,7 +10,7 @@ version = "0.1.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-napi = "1"
+napi = "2"
 napi-derive = "1"
 lz4_flex = { version = "0.9.0" }
 
