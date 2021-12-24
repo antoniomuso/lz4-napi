@@ -4,9 +4,7 @@
 extern crate napi_derive;
 
 use lz4_flex::{compress_prepend_size, decompress_size_prepended};
-use napi::{
-  CallContext, Env, Error, JsBuffer, JsBufferValue, JsObject, JsUnknown, Ref, Result, Status, Task,
-};
+use napi::{bindgen_prelude::*, JsBuffer, JsBufferValue, Ref, JsUnknown};
 
 #[cfg(all(
   any(windows, unix),
@@ -21,6 +19,7 @@ struct Enc {
   data: Ref<JsBufferValue>,
 }
 
+#[napi]
 impl Task for Enc {
   type Output = Vec<u8>;
   type JsValue = JsBuffer;
@@ -30,12 +29,12 @@ impl Task for Enc {
     Ok(compress_prepend_size(data))
   }
 
-  fn resolve(self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
+  fn resolve(&mut self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
     self.data.unref(env)?;
     env.create_buffer_with_data(output).map(|b| b.into_raw())
   }
 
-  fn reject(self, env: Env, err: Error) -> Result<Self::JsValue> {
+  fn reject(&mut self, env: Env, err: Error) -> Result<Self::JsValue> {
     self.data.unref(env)?;
     Err(err)
   }
@@ -45,6 +44,7 @@ struct Dec {
   data: Ref<JsBufferValue>,
 }
 
+#[napi]
 impl Task for Dec {
   type Output = Vec<u8>;
   type JsValue = JsBuffer;
@@ -66,17 +66,8 @@ impl Task for Dec {
   }
 }
 
-#[module_exports]
-fn init(mut exports: JsObject) -> Result<()> {
-  exports.create_named_method("compress", compress_data)?;
-  exports.create_named_method("uncompress", uncompress_data)?;
-  exports.create_named_method("compress_sync", compress_data_sync)?;
-  exports.create_named_method("uncompress_sync", uncompress_data_sync)?;
-  Ok(())
-}
-
 #[js_function(1)]
-fn compress_data(ctx: CallContext) -> Result<JsObject> {
+fn compress_data(data: JsBuffer) -> Result<JsObject> {
   let data = ctx.get::<JsBuffer>(0)?;
   let encoder = Enc {
     data: data.into_ref()?,
@@ -84,18 +75,16 @@ fn compress_data(ctx: CallContext) -> Result<JsObject> {
   ctx.env.spawn(encoder).map(|v| v.promise_object())
 }
 
-#[js_function(1)]
-fn uncompress_data(ctx: CallContext) -> Result<JsObject> {
-  let data = ctx.get::<JsBuffer>(0)?;
+#[napi]
+fn uncompress_data(data: JsBuffer) -> Result<JsObject> {
   let decoder = Dec {
     data: data.into_ref()?,
   };
   ctx.env.spawn(decoder).map(|v| v.promise_object())
 }
 
-#[js_function(1)]
-fn uncompress_data_sync(ctx: CallContext) -> Result<JsUnknown> {
-  let data = ctx.get::<JsBuffer>(0)?;
+#[napi]
+fn uncompress_data_sync(data: JsBuffer) -> Result<JsUnknown> {
   decompress_size_prepended(&data.into_value()?)
     .map_err(|e| Error::new(napi::Status::GenericFailure, format!("{}", e)))
     .and_then(|d| {
@@ -106,8 +95,8 @@ fn uncompress_data_sync(ctx: CallContext) -> Result<JsUnknown> {
     })
 }
 
-#[js_function(1)]
-fn compress_data_sync(ctx: CallContext) -> Result<JsUnknown> {
+#[napi]
+fn compress_data_sync(data: JsBuffer) -> Result<JsUnknown> {
   let data = ctx.get::<JsBuffer>(0)?;
   ctx
     .env

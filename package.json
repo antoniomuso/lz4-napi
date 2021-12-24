@@ -94,7 +94,7 @@
       "prettier --write",
       "eslint -c .eslintrc.yml --fix"
     ],
-    "*.@(yml|yaml)": [
+    "*.@((js|ts|tsx|yml|yaml|md|json)": [
       "prettier --parser yaml --write"
     ],
     "*.md": [
