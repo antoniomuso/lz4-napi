@@ -5,11 +5,11 @@ extern crate napi_derive;
 
 use lz4_flex::{compress_prepend_size, decompress_size_prepended};
 use napi::{
-  CallContext, Env, Error, JsBuffer, JsBufferValue, JsObject, JsUnknown, Ref, Result, Status, Task,
+  bindgen_prelude::{AsyncTask, Buffer},
+  Either, Env, Error, JsBuffer, JsBufferValue, Ref, Result, Status, Task,
 };
 
 #[cfg(all(
-  any(windows, unix),
   target_arch = "x86_64",
   not(target_env = "musl"),
   not(debug_assertions)
@@ -18,99 +18,113 @@ use napi::{
 static ALLOC: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
 struct Enc {
-  data: Ref<JsBufferValue>,
+  data: Data,
 }
 
+pub enum Data {
+  Buffer(Ref<JsBufferValue>),
+  String(String),
+}
+
+impl TryFrom<Either<String, JsBuffer>> for Data {
+  type Error = Error;
+
+  fn try_from(value: Either<String, JsBuffer>) -> Result<Self> {
+    match value {
+      Either::A(s) => Ok(Data::String(s)),
+      Either::B(b) => Ok(Data::Buffer(b.into_ref()?)),
+    }
+  }
+}
+
+#[napi]
 impl Task for Enc {
   type Output = Vec<u8>;
   type JsValue = JsBuffer;
 
   fn compute(&mut self) -> Result<Self::Output> {
-    let data: &[u8] = &self.data;
+    let data: &[u8] = match self.data {
+      Data::Buffer(ref b) => b.as_ref(),
+      Data::String(ref s) => s.as_bytes(),
+    };
     Ok(compress_prepend_size(data))
   }
 
-  fn resolve(self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
-    self.data.unref(env)?;
+  fn resolve(&mut self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
     env.create_buffer_with_data(output).map(|b| b.into_raw())
   }
 
-  fn reject(self, env: Env, err: Error) -> Result<Self::JsValue> {
-    self.data.unref(env)?;
-    Err(err)
+  fn finally(&mut self, env: Env) -> Result<()> {
+    if let Data::Buffer(b) = &mut self.data {
+      b.unref(env)?;
+    }
+    Ok(())
   }
 }
 
 struct Dec {
-  data: Ref<JsBufferValue>,
+  data: Data,
 }
 
+#[napi]
 impl Task for Dec {
   type Output = Vec<u8>;
   type JsValue = JsBuffer;
 
   fn compute(&mut self) -> Result<Self::Output> {
-    let data: &[u8] = &self.data;
+    let data: &[u8] = match self.data {
+      Data::Buffer(ref b) => b.as_ref(),
+      Data::String(ref s) => s.as_bytes(),
+    };
     decompress_size_prepended(data)
       .map_err(|e| Error::new(Status::GenericFailure, format!("{}", e)))
   }
 
-  fn resolve(self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
-    self.data.unref(env)?;
+  fn resolve(&mut self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
     env.create_buffer_with_data(output).map(|b| b.into_raw())
   }
 
-  fn reject(self, env: Env, err: Error) -> Result<Self::JsValue> {
-    self.data.unref(env)?;
-    Err(err)
+  fn finally(&mut self, env: Env) -> Result<()> {
+    if let Data::Buffer(b) = &mut self.data {
+      b.unref(env)?;
+    }
+    Ok(())
   }
 }
 
-#[module_exports]
-fn init(mut exports: JsObject) -> Result<()> {
-  exports.create_named_method("compress", compress_data)?;
-  exports.create_named_method("uncompress", uncompress_data)?;
-  exports.create_named_method("compress_sync", compress_data_sync)?;
-  exports.create_named_method("uncompress_sync", uncompress_data_sync)?;
-  Ok(())
-}
-
-#[js_function(1)]
-fn compress_data(ctx: CallContext) -> Result<JsObject> {
-  let data = ctx.get::<JsBuffer>(0)?;
+#[napi]
+fn compress(data: Either<String, JsBuffer>) -> Result<AsyncTask<Enc>> {
   let encoder = Enc {
-    data: data.into_ref()?,
+    data: data.try_into()?,
   };
-  ctx.env.spawn(encoder).map(|v| v.promise_object())
+  Ok(AsyncTask::new(encoder))
 }
 
-#[js_function(1)]
-fn uncompress_data(ctx: CallContext) -> Result<JsObject> {
-  let data = ctx.get::<JsBuffer>(0)?;
+#[napi]
+fn uncompress(data: Either<String, JsBuffer>) -> Result<AsyncTask<Dec>> {
   let decoder = Dec {
-    data: data.into_ref()?,
+    data: data.try_into()?,
   };
-  ctx.env.spawn(decoder).map(|v| v.promise_object())
+  Ok(AsyncTask::new(decoder))
 }
 
-#[js_function(1)]
-fn uncompress_data_sync(ctx: CallContext) -> Result<JsUnknown> {
-  let data = ctx.get::<JsBuffer>(0)?;
-  decompress_size_prepended(&data.into_value()?)
-    .map_err(|e| Error::new(napi::Status::GenericFailure, format!("{}", e)))
-    .and_then(|d| {
-      ctx
-        .env
-        .create_buffer_with_data(d)
-        .map(|b| b.into_raw().into_unknown())
+#[napi]
+fn uncompress_sync(data: Either<String, Buffer>) -> Result<Buffer> {
+  decompress_size_prepended(match data {
+    Either::A(ref s) => s.as_bytes(),
+    Either::B(ref b) => b.as_ref(),
+  })
+  .map_err(|e| Error::new(napi::Status::GenericFailure, format!("{}", e)))
+  .map(|d| d.into())
+}
+
+#[napi]
+fn compress_sync(data: Either<String, Buffer>) -> Result<Buffer> {
+  Ok(
+    compress_prepend_size(match data {
+      Either::A(ref b) => b.as_bytes(),
+      Either::B(ref s) => s.as_ref(),
     })
-}
-
-#[js_function(1)]
-fn compress_data_sync(ctx: CallContext) -> Result<JsUnknown> {
-  let data = ctx.get::<JsBuffer>(0)?;
-  ctx
-    .env
-    .create_buffer_with_data(compress_prepend_size(&data.into_value()?))
-    .map(|op| op.into_raw().into_unknown())
+    .into(),
+  )
 }
