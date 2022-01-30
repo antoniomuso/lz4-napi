@@ -1,3 +1,18 @@
+## [2.0.3](https://github.com/antoniomuso/lz4-napi/compare/v1.0.1...v2.0.3) (2022-01-30)
+
+
+### Bug Fixes
+
+* fix release ([e63b327](https://github.com/antoniomuso/lz4-napi/commit/e63b327786ce0ee87689663e37838bfb35002864))
+* **type:** removed string from uncompress input type ([b7fc2ca](https://github.com/antoniomuso/lz4-napi/commit/b7fc2cacd9b8664006105d4417c04fb6a1103a17))
+
+
+### Features
+
+* napi 2.0.0 ([19845a5](https://github.com/antoniomuso/lz4-napi/commit/19845a54fe0b4897b4fde9ba5796dd061f055422))
+
+
+
 ## [2.0.2](https://github.com/antoniomuso/lz4-napi/compare/v1.0.1...v2.0.2) (2022-01-30)
 
 
