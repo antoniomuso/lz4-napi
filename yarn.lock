@@ -1016,7 +1016,7 @@ camelcase@^6.2.0:
   resolved "https://registry.npmjs.org/camelcase/-/camelcase-6.2.0.tgz#924af881c9d525ac9d87f40d964e5cea982a1809"
   integrity sha512-c7wVvbw3f37nuobQNtgsgG9POC9qMbNuMQmTCqZv23b6MIz0fcYpBiOlv9gEN/hdLdnZTDQhg6e9Dq5M1vKvfg==
 
-chalk@4, chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.2:
+chalk@4, chalk@^4.0.0, chalk@^4.1.0:
   version "4.1.2"
   resolved "https://registry.npmjs.org/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -1032,6 +1032,11 @@ chalk@^2.0.0, chalk@^2.4.1:
     ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
+
+chalk@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.0.1.tgz#ca57d71e82bb534a296df63bbacc4a1c22b2a4b6"
+  integrity sha512-Fo07WOYGqMfCWHOzSXOt2CxDbC6skS/jO9ynEcmpANMoPrD+W1r1K6Vx7iNm+AQmETU1Xr2t+n8nzkV9t6xh3w==
 
 chokidar@^3.4.3:
   version "3.5.2"
