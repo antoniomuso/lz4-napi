@@ -263,9 +263,9 @@
   integrity sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==
 
 "@napi-rs/cli@^2.4.2":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@napi-rs/cli/-/cli-2.5.0.tgz#68cbf772e977d3b9d80b300c1225766460514a7c"
-  integrity sha512-OstHFxgQaGFgir0XfvHLstpxhYY+YLafUKQSyAAAIW8QerlgmijDnZa0Oka7QkdYbVEPw6mFCuxu7JiPYF+SYw==
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@napi-rs/cli/-/cli-2.8.0.tgz#536677acf045fc223fab4ac746f25e10b7afb907"
+  integrity sha512-yECNMAcIpdy58PcOgsIK6x6FzSButzpdR0QFjdv4d1d0OzeTSmcyt9tVqyc8ZPfEUXnQdNVBXY9wVQLVY1pi/A==
 
 "@napi-rs/snappy-android-arm-eabi@7.1.1":
   version "7.1.1"
