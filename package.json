@@ -76,6 +76,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-sonarjs": "latest",
     "husky": "^8.0.1",
     "legacy-snappy": "npm:snappy@6",
     "lint-staged": "^13.0.3",
