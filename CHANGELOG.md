@@ -1,3 +1,12 @@
+# [2.2.0](https://github.com/antoniomuso/lz4-napi/compare/v2.1.0...v2.2.0) (2022-09-24)
+
+
+### Features
+
+* added dict support ([640dc96](https://github.com/antoniomuso/lz4-napi/commit/640dc9687d8e635a2457cba48f15d54a0a83532d))
+
+
+
 ## [2.0.3](https://github.com/antoniomuso/lz4-napi/compare/v1.0.1...v2.0.3) (2022-01-30)
 
 
