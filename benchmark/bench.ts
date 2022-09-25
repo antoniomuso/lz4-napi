@@ -26,6 +26,7 @@ const inflateAsync = promisify(inflate)
 const brotliDecompressAsync = promisify(brotliDecompress)
 
 const FIXTURE = readFileSync(join(__dirname, '..', 'yarn.lock'))
+const FIXTURE_DICT = readFileSync(join(__dirname, '..', '__test__/dict.bin'))
 const LZ4_COMPRESSED_FIXTURE = Buffer.from(compressSync(FIXTURE))
 const SNAPPY_COMPRESSED_FIXTURE = Buffer.from(snappy.compressSync(FIXTURE))
 const GZIP_FIXTURE = gzipSync(FIXTURE)
@@ -38,6 +39,10 @@ async function run() {
 
     b.add('lz4', () => {
       return compress(FIXTURE)
+    }),
+
+    b.add('lz4 dict', () => {
+      return compress(FIXTURE, FIXTURE_DICT)
     }),
 
     b.add('snappy', () => {
@@ -65,6 +70,10 @@ async function run() {
 
     b.add('lz4', () => {
       return uncompress(LZ4_COMPRESSED_FIXTURE)
+    }),
+
+    b.add('lz4 dict', () => {
+      return uncompress(LZ4_COMPRESSED_FIXTURE, FIXTURE_DICT)
     }),
 
     b.add('snappy', () => {
