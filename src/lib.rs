@@ -18,10 +18,6 @@ use napi::{
 #[global_allocator]
 static ALLOC: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
-struct Enc {
-  data: Data,
-}
-
 pub enum Data {
   Buffer(Ref<JsBufferValue>),
   String(String),
@@ -36,6 +32,10 @@ impl TryFrom<Either<String, JsBuffer>> for Data {
       Either::B(b) => Ok(Data::Buffer(b.into_ref()?)),
     }
   }
+}
+
+struct Enc {
+  data: Data,
 }
 
 #[napi]
@@ -91,6 +91,11 @@ impl Task for Dec {
     }
     Ok(())
   }
+}
+
+struct EncDict {
+  data: Data,
+  dict: Data,
 }
 
 #[napi]
@@ -159,11 +164,6 @@ impl Task for DecDict {
     }
     Ok(())
   }
-}
-
-struct EncDict {
-  data: Data,
-  dict: Data,
 }
 
 #[napi]
