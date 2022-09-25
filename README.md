@@ -75,13 +75,13 @@ const uncompressedBuffer = await uncompress(compressedBuffer)
 #### `compress`
 
 ```ts
-(data: Buffer | string | ArrayBuffer | Uint8Array) => Promise<Buffer>
+(data: Buffer | string | ArrayBuffer | Uint8Array, dict?: string | Buffer) => Promise<Buffer>
 ```
 
 #### `uncompress`
 
 ```ts
-(data: Buffer | ArrayBuffer | Uint8Array) => Promise<Buffer>
+(data: Buffer | string | ArrayBuffer | Uint8Array, dict?: string | Buffer) => Promise<Buffer>
 ```
 
 ### Sync
@@ -89,13 +89,13 @@ const uncompressedBuffer = await uncompress(compressedBuffer)
 #### `compressSync`
 
 ```ts
-(data: Buffer | string | ArrayBuffer | Uint8Array) => Buffer
+(data: Buffer | string | ArrayBuffer | Uint8Array, dict?: string | Buffer) => Buffer
 ```
 
 #### `uncompressSync`
 
 ```ts
-(data: Buffer | ArrayBuffer | Uint8Array) => Buffer
+(data: Buffer | string | ArrayBuffer | Uint8Array, dict?: string | Buffer) => Buffer
 ```
 
 ## Performance
