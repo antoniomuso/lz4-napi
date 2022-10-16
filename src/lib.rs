@@ -185,7 +185,7 @@ fn compress(
 }
 
 #[napi]
-fn uncompress(
+fn decompress(
   data: Either<String, JsBuffer>,
   dict: Option<Either<String, JsBuffer>>,
 ) -> Result<Either<AsyncTask<Dec>, AsyncTask<DecDict>>> {
@@ -203,7 +203,7 @@ fn uncompress(
 }
 
 #[napi]
-fn uncompress_sync(
+fn decompress_sync(
   data: Either<String, Buffer>,
   dict: Option<Either<String, Buffer>>,
 ) -> Result<Buffer> {

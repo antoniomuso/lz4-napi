@@ -15,14 +15,14 @@
 - [Installation](#installation)
 - [Usage](#usage)
   - [Compress](#compress)
-  - [Uncompress](#uncompress)
+  - [decompress](#decompress)
 - [APIs](#apis)
   - [Promises](#promises)
     - [`compress`](#compress)
-    - [`uncompress`](#uncompress)
+    - [`decompress`](#decompress)
   - [Sync](#sync)
     - [`compressSync`](#compresssync)
-    - [`uncompressSync`](#uncompresssync)
+    - [`decompressSync`](#decompresssync)
 - [Benchmarks](#benchmarks)
 - [Performance](#performance)
   - [Hardware](#hardware)
@@ -57,14 +57,14 @@ const compressedBuffer = await compress(buffer)
 // Store compressed buffer somewhere
 ```
 
-### Uncompress
+### decompress
 
 ```js
-const { uncompress } = require('lz4-napi');
+const { decompress } = require('lz4-napi');
 
 // if you support top-level await
 const compressedBuffer = await getFromSomeStorage();
-const uncompressedBuffer = await uncompress(compressedBuffer)
+const decompressedBuffer = await decompress(compressedBuffer)
 // Do something with compressedBuffer!
 ```
 
@@ -78,7 +78,7 @@ const uncompressedBuffer = await uncompress(compressedBuffer)
 (data: Buffer | string | ArrayBuffer | Uint8Array, dict?: string | Buffer) => Promise<Buffer>
 ```
 
-#### `uncompress`
+#### `decompress`
 
 ```ts
 (data: Buffer | string | ArrayBuffer | Uint8Array, dict?: string | Buffer) => Promise<Buffer>
@@ -92,7 +92,7 @@ const uncompressedBuffer = await uncompress(compressedBuffer)
 (data: Buffer | string | ArrayBuffer | Uint8Array, dict?: string | Buffer) => Buffer
 ```
 
-#### `uncompressSync`
+#### `decompressSync`
 
 ```ts
 (data: Buffer | string | ArrayBuffer | Uint8Array, dict?: string | Buffer) => Buffer

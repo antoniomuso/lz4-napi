@@ -16,7 +16,7 @@ import {
 import b from 'benny'
 import snappy from 'snappy'
 
-import { compress, uncompress, compressSync } from '../index'
+import { compress, decompress, compressSync } from '../index'
 
 const gzipAsync = promisify(gzip)
 const brotliCompressAsync = promisify(brotliCompress)
@@ -69,11 +69,11 @@ async function run() {
     'Decompress',
 
     b.add('lz4', () => {
-      return uncompress(LZ4_COMPRESSED_FIXTURE)
+      return decompress(LZ4_COMPRESSED_FIXTURE)
     }),
 
     b.add('lz4 dict', () => {
-      return uncompress(LZ4_COMPRESSED_FIXTURE, FIXTURE_DICT)
+      return decompress(LZ4_COMPRESSED_FIXTURE, FIXTURE_DICT)
     }),
 
     b.add('snappy', () => {

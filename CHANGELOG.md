@@ -13,7 +13,7 @@
 ### Bug Fixes
 
 * fix release ([e63b327](https://github.com/antoniomuso/lz4-napi/commit/e63b327786ce0ee87689663e37838bfb35002864))
-* **type:** removed string from uncompress input type ([b7fc2ca](https://github.com/antoniomuso/lz4-napi/commit/b7fc2cacd9b8664006105d4417c04fb6a1103a17))
+* **type:** removed string from decompress input type ([b7fc2ca](https://github.com/antoniomuso/lz4-napi/commit/b7fc2cacd9b8664006105d4417c04fb6a1103a17))
 
 
 ### Features
@@ -27,7 +27,7 @@
 
 ### Bug Fixes
 
-* **type:** removed string from uncompress input type ([b7fc2ca](https://github.com/antoniomuso/lz4-napi/commit/b7fc2cacd9b8664006105d4417c04fb6a1103a17))
+* **type:** removed string from decompress input type ([b7fc2ca](https://github.com/antoniomuso/lz4-napi/commit/b7fc2cacd9b8664006105d4417c04fb6a1103a17))
 
 
 ### Features
@@ -41,7 +41,7 @@
 
 ### Bug Fixes
 
-* **type:** removed string from uncompress input type ([b7fc2ca](https://github.com/antoniomuso/lz4-napi/commit/b7fc2cacd9b8664006105d4417c04fb6a1103a17))
+* **type:** removed string from decompress input type ([b7fc2ca](https://github.com/antoniomuso/lz4-napi/commit/b7fc2cacd9b8664006105d4417c04fb6a1103a17))
 
 
 ### Features
@@ -55,7 +55,7 @@
 
 ### Bug Fixes
 
-* **type:** removed string from uncompress input type ([b7fc2ca](https://github.com/antoniomuso/lz4-napi/commit/b7fc2cacd9b8664006105d4417c04fb6a1103a17))
+* **type:** removed string from decompress input type ([b7fc2ca](https://github.com/antoniomuso/lz4-napi/commit/b7fc2cacd9b8664006105d4417c04fb6a1103a17))
 
 
 ### Features
@@ -69,7 +69,7 @@
 
 ### Bug Fixes
 
-* **type:** removed string from uncompress input type ([b7fc2ca](https://github.com/antoniomuso/lz4-napi/commit/b7fc2cacd9b8664006105d4417c04fb6a1103a17))
+* **type:** removed string from decompress input type ([b7fc2ca](https://github.com/antoniomuso/lz4-napi/commit/b7fc2cacd9b8664006105d4417c04fb6a1103a17))
 
 
 
