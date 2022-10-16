@@ -218,9 +218,9 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { compress, uncompress, uncompressSync, compressSync } = nativeBinding
+const { compress, decompress, decompressSync, compressSync } = nativeBinding
 
 module.exports.compress = compress
-module.exports.uncompress = uncompress
-module.exports.uncompressSync = uncompressSync
+module.exports.decompress = decompress
+module.exports.decompressSync = decompressSync
 module.exports.compressSync = compressSync
