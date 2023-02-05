@@ -96,6 +96,15 @@ switch (platform) {
     }
     break
   case 'darwin':
+    localFileExisted = existsSync(join(__dirname, 'lz4-napi.darwin-universal.node'))
+    try {
+      if (localFileExisted) {
+        nativeBinding = require('./lz4-napi.darwin-universal.node')
+      } else {
+        nativeBinding = require('@antoniomuso/lz4-napi-darwin-universal')
+      }
+      break
+    } catch {}
     switch (arch) {
       case 'x64':
         localFileExisted = existsSync(join(__dirname, 'lz4-napi.darwin-x64.node'))
