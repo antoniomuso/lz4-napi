@@ -77,8 +77,7 @@ impl Task for Dec {
       Data::Buffer(ref b) => b.as_ref(),
       Data::String(ref s) => s.as_bytes(),
     };
-    decompress_size_prepended(data)
-      .map_err(|e| Error::new(Status::GenericFailure, format!("{}", e)))
+    decompress_size_prepended(data).map_err(|e| Error::new(Status::GenericFailure, format!("{e}")))
   }
 
   fn resolve(&mut self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
@@ -151,7 +150,7 @@ impl Task for DecDict {
     };
 
     decompress_size_prepended_with_dict(data, dict)
-      .map_err(|e| Error::new(Status::GenericFailure, format!("{}", e)))
+      .map_err(|e| Error::new(Status::GenericFailure, format!("{e}")))
   }
 
   fn resolve(&mut self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
@@ -218,14 +217,14 @@ fn uncompress_sync(
         Either::B(ref b) => b.as_ref(),
       },
     )
-    .map_err(|e| Error::new(napi::Status::GenericFailure, format!("{}", e)))
+    .map_err(|e| Error::new(napi::Status::GenericFailure, format!("{e}")))
     .map(|d| d.into());
   }
   decompress_size_prepended(match data {
     Either::A(ref s) => s.as_bytes(),
     Either::B(ref b) => b.as_ref(),
   })
-  .map_err(|e| Error::new(napi::Status::GenericFailure, format!("{}", e)))
+  .map_err(|e| Error::new(napi::Status::GenericFailure, format!("{e}")))
   .map(|d| d.into())
 }
 
