@@ -449,21 +449,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc-node/core@npm:^1.9.2":
-  version: 1.9.2
-  resolution: "@swc-node/core@npm:1.9.2"
+"@swc-node/core@npm:^1.10.0":
+  version: 1.10.0
+  resolution: "@swc-node/core@npm:1.10.0"
   peerDependencies:
     "@swc/core": ">= 1.3"
-  checksum: 2a91a294b9947b33d0244d5e176a89adc6986c04b9b9e0ec0471815bc3d6d7f250be4546e9bc19f30bce5c5f0dbea01ed13bca351c5dfd45e54e9becae3fa0f4
+  checksum: f7bbc1798ac6fb8b74074e5e33ae52599163d337817a2ba8dc7d96893b4e0d1d9f6a8e924edf8f90ae08c3bb015f251643d99483126aa0cc3ba7755076d1faf8
   languageName: node
   linkType: hard
 
 "@swc-node/register@npm:^1.5.1":
-  version: 1.5.6
-  resolution: "@swc-node/register@npm:1.5.6"
+  version: 1.6.1
+  resolution: "@swc-node/register@npm:1.6.1"
   dependencies:
-    "@swc-node/core": ^1.9.2
-    "@swc-node/sourcemap-support": ^0.2.4
+    "@swc-node/core": ^1.10.0
+    "@swc-node/sourcemap-support": ^0.3.0
     colorette: ^2.0.19
     debug: ^4.3.4
     pirates: ^4.0.5
@@ -471,17 +471,17 @@ __metadata:
   peerDependencies:
     "@swc/core": ">= 1.3"
     typescript: ">= 4.3"
-  checksum: 30acf1ba99efb07a94dc85742bafe5ef8adefefa5a85d8a42107149581b5615c3da83a59c708f6240edd29767d5d3c12a0d2408ba146fcdc08d4a312a9f62dd4
+  checksum: d1d6ed56ec4277ae737493207731134b361e43dc26551cdeae5903d8dd7716bf942f68ff6acb31a4eabbe48325919ce88e5e2d3cba4548950c773d247a94bcae
   languageName: node
   linkType: hard
 
-"@swc-node/sourcemap-support@npm:^0.2.4":
-  version: 0.2.4
-  resolution: "@swc-node/sourcemap-support@npm:0.2.4"
+"@swc-node/sourcemap-support@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@swc-node/sourcemap-support@npm:0.3.0"
   dependencies:
     source-map-support: ^0.5.21
     tslib: ^2.5.0
-  checksum: 9587ae15610effb9c6593a9a1455f4a1aa44c0db500c4d6da153581dacd1e628c9cb92e7cafa0813ec71cb41efd7856c1c55e1e40db8323726d6f5c92b4c8b60
+  checksum: a3c837ed790238ef88682eb342b75d756eba5eb3b6cfe6cf14a597bd78dfc9a9797f1e54a4977c1297e5324fba2e33bd76ab8aa9c396ad463693de2001180c9e
   languageName: node
   linkType: hard
 
