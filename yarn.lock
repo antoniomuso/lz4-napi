@@ -622,10 +622,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.6.2":
-  version: 18.13.0
-  resolution: "@types/node@npm:18.13.0"
-  checksum: 4ea10f8802848b01672bce938f678b6774ca2cee0c9774f12275ab064ae07818419c3e2e41d6257ce7ba846d1ea26c63214aa1dfa4166fa3746291752b8c6416
+"@types/node@npm:^20.2.0":
+  version: 20.2.0
+  resolution: "@types/node@npm:20.2.0"
+  checksum: 9b937367448a07482af14e3518125ae531bff99e16d51e0945f4f93dbd7051d8a270811bdeb57f0b52c629fb0c9c401a238a7352dfbc87e26495b6f0f59cbdb6
   languageName: node
   linkType: hard
 
@@ -3886,7 +3886,7 @@ __metadata:
     "@node-rs/helper": ^1.3.3
     "@swc-node/register": ^1.5.1
     "@swc/core": ^1.3.3
-    "@types/node": ^18.6.2
+    "@types/node": ^20.2.0
     "@typescript-eslint/eslint-plugin": ^5.31.0
     "@typescript-eslint/parser": ^5.31.0
     ava: ^5.1.0
