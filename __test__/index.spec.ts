@@ -2,7 +2,7 @@ import { readFileSync } from 'fs'
 
 import test from 'ava'
 
-import { compress, uncompress, compressSync, uncompressSync } from '../index.js'
+import { compress, uncompress, compressSync, uncompressSync, compressFrame, decompressFrame } from '../index.js'
 
 const stringToCompress = 'adewqeqweqwewleekqwoekqwoekqwpoekqwpoekqwpoekqwpoekqwpoekqwpokeeqw'
 const dict = readFileSync('__test__/dict.bin')
@@ -11,6 +11,14 @@ test('compress should return smaller value', async (t) => {
   const before = Buffer.from(stringToCompress)
   const compressed = await compress(before)
   t.true(before.length > compressed.length)
+  t.true(compressed.length !== 0)
+})
+
+test('compressFrame should return smaller value', async (t) => {
+  const before = Buffer.from(stringToCompress)
+  const compressed = await compressFrame(before)
+  t.true(before.length > compressed.length)
+  t.true(compressed.length !== 0)
 })
 
 test('compress decompress should work', async (t) => {
@@ -48,4 +56,12 @@ test('uncompress should take all input types', async (t) => {
   const compressedValue = compressSync(stringToCompress)
   await t.notThrowsAsync(uncompress(compressedValue))
   await t.notThrowsAsync(uncompress(new Uint8Array(compressedValue)))
+})
+
+test('compress and decompress frame should work', async (t) => {
+  const before = Buffer.from(stringToCompress)
+  const compressed = await compressFrame(before)
+  t.true(before.length > compressed.length)
+  const decompressed = await decompressFrame(compressed)
+  t.is(before.toString('utf8'), decompressed.toString('utf8'))
 })
