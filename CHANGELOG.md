@@ -1,3 +1,19 @@
+# [2.3.0](https://github.com/antoniomuso/lz4-napi/compare/v2.2.0...v2.3.0) (2024-10-10)
+
+
+### Bug Fixes
+
+* build ([a0eb566](https://github.com/antoniomuso/lz4-napi/commit/a0eb5668821a6781218bc67c8984346d1660ec3b))
+
+
+### Features
+
+* added frame compression decompression ([ce4b029](https://github.com/antoniomuso/lz4-napi/commit/ce4b0292becbfeea6d902d97d918fc6447b8df83))
+* bump to 2.23.0 ([ef0e01f](https://github.com/antoniomuso/lz4-napi/commit/ef0e01ffba311e1637495e6cb7b51b0ca8b963eb))
+* upgrade deps and CI ([16c8079](https://github.com/antoniomuso/lz4-napi/commit/16c807945c29d6e6385eb344e17f670cf5699d8a))
+
+
+
 # [2.2.0](https://github.com/antoniomuso/lz4-napi/compare/v2.1.0...v2.2.0) (2022-09-24)
 
 
