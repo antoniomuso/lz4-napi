@@ -158,13 +158,13 @@ jobs:
           path: ${{ env.APP_NAME }}.*.node
           if-no-files-found: error
   build-freebsd:
-    runs-on: macos-12
+    runs-on: ubuntu-latest
     name: Build FreeBSD
     steps:
       - uses: actions/checkout@v4
       - name: Build
         id: build
-        uses: cross-platform-actions/action@v0.23.0
+        uses: cross-platform-actions/action@v0.25.0
         env:
           DEBUG: napi:*
           RUSTUP_HOME: /usr/local/rustup
@@ -172,8 +172,8 @@ jobs:
           RUSTUP_IO_THREADS: 1
         with:
           operating_system: freebsd
-          version: '13.2'
-          memory: 13G
+          version: '14.1'
+          memory: 8G
           cpu_count: 3
           environment_variables: 'DEBUG RUSTUP_IO_THREADS'
           shell: bash

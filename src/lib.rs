@@ -3,7 +3,10 @@
 #[macro_use]
 extern crate napi_derive;
 
+use std::io::{BufWriter, Read, Write};
+
 use lz4_flex::block::{compress_prepend_size_with_dict, decompress_size_prepended_with_dict};
+use lz4_flex::frame::{FrameDecoder, FrameEncoder};
 use lz4_flex::{compress_prepend_size, decompress_size_prepended};
 use napi::{
   bindgen_prelude::{AsyncTask, Buffer},
@@ -165,6 +168,83 @@ impl Task for DecDict {
   }
 }
 
+struct FrameDec {
+  data: Data,
+}
+
+#[napi]
+impl Task for FrameDec {
+  type Output = Vec<u8>;
+  type JsValue = JsBuffer;
+
+  fn compute(&mut self) -> Result<Self::Output> {
+    let data: &[u8] = match self.data {
+      Data::Buffer(ref b) => b.as_ref(),
+      Data::String(ref s) => s.as_bytes(),
+    };
+
+    let mut buf = vec![];
+
+    let mut decoder = FrameDecoder::new(data);
+    decoder.read_to_end(&mut buf)?;
+
+    Ok(buf)
+  }
+
+  fn resolve(&mut self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
+    env.create_buffer_with_data(output).map(|b| b.into_raw())
+  }
+
+  fn finally(&mut self, env: Env) -> Result<()> {
+    if let Data::Buffer(b) = &mut self.data {
+      b.unref(env)?;
+    }
+    Ok(())
+  }
+}
+
+struct FrameEnc {
+  data: Data,
+}
+
+#[napi]
+impl Task for FrameEnc {
+  type Output = Vec<u8>;
+  type JsValue = JsBuffer;
+
+  fn compute(&mut self) -> Result<Self::Output> {
+    let data: &[u8] = match self.data {
+      Data::Buffer(ref b) => b.as_ref(),
+      Data::String(ref s) => s.as_bytes(),
+    };
+
+    let mut buffer = vec![];
+
+    let buf = BufWriter::new(&mut buffer);
+
+    let mut encoder = FrameEncoder::new(buf);
+
+    encoder.write_all(data)?;
+
+    encoder
+      .finish()
+      .map_err(|e| Error::new(napi::Status::Unknown, e.to_string()))?;
+
+    Ok(buffer)
+  }
+
+  fn resolve(&mut self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
+    env.create_buffer_with_data(output).map(|b| b.into_raw())
+  }
+
+  fn finally(&mut self, env: Env) -> Result<()> {
+    if let Data::Buffer(b) = &mut self.data {
+      b.unref(env)?;
+    }
+    Ok(())
+  }
+}
+
 #[napi]
 fn compress(
   data: Either<String, JsBuffer>,
@@ -255,4 +335,20 @@ fn compress_sync(
     })
     .into(),
   )
+}
+
+#[napi]
+fn compress_frame(data: Either<String, JsBuffer>) -> Result<AsyncTask<FrameEnc>> {
+  let encoder = FrameEnc {
+    data: data.try_into()?,
+  };
+  Ok(AsyncTask::new(encoder))
+}
+
+#[napi]
+fn decompress_frame(data: Either<String, JsBuffer>) -> Result<AsyncTask<FrameDec>> {
+  let decoder = FrameDec {
+    data: data.try_into()?,
+  };
+  Ok(AsyncTask::new(decoder))
 }
