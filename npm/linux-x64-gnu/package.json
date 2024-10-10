@@ -1,0 +1,37 @@
+{
+  "name": "@antoniomuso/lz4-napi-linux-x64-gnu",
+  "version": "2.5.0",
+  "cpu": [
+    "x64"
+  ],
+  "main": "lz4-napi.linux-x64-gnu.node",
+  "files": [
+    "lz4-napi.linux-x64-gnu.node"
+  ],
+  "description": "Fastest lz4 compression library in Node.js, powered by napi-rs and lz4-flex.",
+  "keywords": [
+    "napi-rs",
+    "NAPI",
+    "N-API",
+    "Rust",
+    "node-addon",
+    "node-addon-api",
+    "lz4",
+    "node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": "git@github.com:antoniomuso/lz4-napi.git",
+  "os": [
+    "linux"
+  ],
+  "libc": [
+    "glibc"
+  ]
+}
