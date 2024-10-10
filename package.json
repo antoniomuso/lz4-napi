@@ -1,6 +1,6 @@
 {
   "name": "lz4-napi",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "description": "Fastest lz4 compression library in Node.js, powered by napi-rs and lz4-flex.",
   "main": "index.js",
   "repository": "git@github.com:antoniomuso/lz4-napi.git",
