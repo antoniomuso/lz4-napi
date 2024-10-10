@@ -1,3 +1,12 @@
+# [2.4.0](https://github.com/antoniomuso/lz4-napi/compare/v2.3.0...v2.4.0) (2024-10-10)
+
+
+### Features
+
+* upgrade deps ([2a07651](https://github.com/antoniomuso/lz4-napi/commit/2a076514141274e9429c5bf6ff466a20a660d0aa))
+
+
+
 ## [2.3.2](https://github.com/antoniomuso/lz4-napi/compare/v2.3.0...v2.3.2) (2024-10-10)
 
 
