@@ -1,8 +1,8 @@
 name: CI
 env:
-  DEBUG: "napi:*"
-  APP_NAME: "lz4-napi"
-  MACOSX_DEPLOYMENT_TARGET: "10.13"
+  DEBUG: napi:*
+  APP_NAME: lz4-napi
+  MACOSX_DEPLOYMENT_TARGET: '10.13'
 permissions:
   contents: write
   id-token: write
@@ -27,11 +27,9 @@ jobs:
         settings:
           - host: macos-latest
             target: x86_64-apple-darwin
-            build: |
-              yarn build
-              strip -x *.node
+            build: yarn build --target x86_64-apple-darwin
           - host: windows-latest
-            build: yarn build
+            build: yarn build --target x86_64-pc-windows-msvc
             target: x86_64-pc-windows-msvc
           - host: windows-latest
             build: |
@@ -40,60 +38,35 @@ jobs:
             target: i686-pc-windows-msvc
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-            build: |-
-              set -e &&
-              yarn build --target x86_64-unknown-linux-gnu &&
-              strip *.node &&
-              chmod 777 -R target
+            build: CC=clang yarn build --target x86_64-unknown-linux-gnu --use-napi-cross
           - host: ubuntu-latest
             target: x86_64-unknown-linux-musl
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
-            build: set -e && yarn build && strip *.node
+            build: yarn build -x --target x86_64-unknown-linux-musl
           - host: macos-latest
             target: aarch64-apple-darwin
-            build: |
-              yarn build --target aarch64-apple-darwin
-              strip -x *.node
+            build: yarn build --target aarch64-apple-darwin
           - host: ubuntu-latest
             target: aarch64-unknown-linux-gnu
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian-aarch64
-            build: |-
-              set -e &&
-              yarn build --target aarch64-unknown-linux-gnu &&
-              aarch64-unknown-linux-gnu-strip *.node &&
-              chmod 777 -R target
+            build: CC=clang yarn build --target aarch64-unknown-linux-gnu --use-napi-cross
           - host: ubuntu-latest
             target: armv7-unknown-linux-gnueabihf
             setup: |
               sudo apt-get update
               sudo apt-get install gcc-arm-linux-gnueabihf -y
-            build: |
-              yarn build -x --target armv7-unknown-linux-gnueabihf
-              arm-linux-gnueabihf-strip *.node
+            build: yarn build --target armv7-unknown-linux-gnueabihf --use-napi-cross
           - host: ubuntu-latest
             target: aarch64-linux-android
-            build: |
-              yarn build --target aarch64-linux-android
-              ${ANDROID_NDK_LATEST_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip *.node
+            build: yarn build --target aarch64-linux-android
           - host: ubuntu-latest
             target: armv7-linux-androideabi
-            build: |
-              yarn build --target armv7-linux-androideabi
-              ${ANDROID_NDK_LATEST_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip *.node
+            build: yarn build --target armv7-linux-androideabi
           - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
-            build: |-
-              set -e &&
-              rustup target add aarch64-unknown-linux-musl &&
-              yarn build --target aarch64-unknown-linux-musl &&
-              /aarch64-linux-musl-cross/bin/aarch64-linux-musl-strip *.node &&
-              chmod 777 -R target
+            build: yarn build --target aarch64-unknown-linux-musl -x
           - host: windows-latest
             target: aarch64-pc-windows-msvc
             build: yarn build --target aarch64-pc-windows-msvc
-    name: stable - ${{ matrix.settings.target }} - node@18
+    name: stable - ${{ matrix.settings.target }} - node@20
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v4
@@ -101,11 +74,10 @@ jobs:
         uses: actions/setup-node@v4
         if: ${{ !matrix.settings.docker }}
         with:
-          node-version: 18
+          node-version: 20
           cache: yarn
       - name: Install
         uses: dtolnay/rust-toolchain@stable
-        if: ${{ !matrix.settings.docker }}
         with:
           toolchain: stable
           targets: ${{ matrix.settings.target }}
@@ -113,16 +85,23 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
+            ~/.cargo/registry
             ~/.cargo/git/db/
             .cargo-cache
+            ~/.napi-rs
             target/
           key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}
       - uses: goto-bus-stop/setup-zig@v2
-        if: ${{ matrix.settings.target == 'armv7-unknown-linux-gnueabihf' }}
+        if: ${{ contains(matrix.settings.target, 'musl') }}
         with:
-          version: 0.11.0
+          version: 0.13.0
+      - name: Install cargo-zigbuild
+        uses: taiki-e/install-action@v2
+        if: ${{ contains(matrix.settings.target, 'musl') }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          tool: cargo-zigbuild
       - name: Setup toolchain
         run: ${{ matrix.settings.setup }}
         if: ${{ matrix.settings.setup }}
@@ -137,19 +116,11 @@ jobs:
         uses: actions/setup-node@v4
         if: matrix.settings.target == 'i686-pc-windows-msvc'
         with:
-          node-version: 18
+          node-version: 20
           cache: yarn
           architecture: x86
-      - name: Build in docker
-        uses: addnab/docker-run-action@v3
-        if: ${{ matrix.settings.docker }}
-        with:
-          image: ${{ matrix.settings.docker }}
-          options: '--user 0:0 -v ${{ github.workspace }}/.cargo-cache/git/db:/usr/local/cargo/git/db -v ${{ github.workspace }}/.cargo/registry/cache:/usr/local/cargo/registry/cache -v ${{ github.workspace }}/.cargo/registry/index:/usr/local/cargo/registry/index -v ${{ github.workspace }}:/build -w /build'
-          run: ${{ matrix.settings.build }}
       - name: Build
         run: ${{ matrix.settings.build }}
-        if: ${{ !matrix.settings.docker }}
         shell: bash
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -215,8 +186,13 @@ jobs:
         settings:
           - host: macos-latest
             target: x86_64-apple-darwin
+            architecture: x64
+          - host: macos-latest
+            target: aarch64-apple-darwin
+            architecture: arm64
           - host: windows-latest
             target: x86_64-pc-windows-msvc
+            architecture: x64
         node:
           - '18'
           - '20'
@@ -228,6 +204,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: yarn
+          architecture: ${{ matrix.settings.architecture }}
       - name: Install dependencies
         run: yarn install --mode=skip-build
       - name: Download artifacts
@@ -257,7 +234,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          check-latest: true
           cache: yarn
       - name: Install dependencies
         run: yarn install
@@ -288,7 +264,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          check-latest: true
           cache: yarn
       - name: Install dependencies
         run: |
@@ -313,6 +288,7 @@ jobs:
       matrix:
         node:
           - '20'
+          - '22'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -431,7 +407,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: yarn
       - name: Install dependencies
         run: yarn install --mode=skip-build
@@ -439,6 +415,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: artifacts
+      - name: create npm dirs
+        run: yarn napi create-npm-dirs
       - name: Move artifacts
         run: yarn artifacts
       - name: List packages
