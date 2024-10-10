@@ -1,6 +1,6 @@
 {
   "name": "@antoniomuso/lz4-napi-freebsd-x64",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "os": [
     "freebsd"
   ],
