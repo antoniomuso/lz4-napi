@@ -1,6 +1,6 @@
 {
   "name": "lz4-napi",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "Fastest lz4 compression library in Node.js, powered by napi-rs and lz4-flex.",
   "main": "index.js",
   "repository": "git@github.com:antoniomuso/lz4-napi.git",
@@ -27,22 +27,16 @@
     "triples": {
       "defaults": true,
       "additional": [
-        "x86_64-unknown-linux-gnu",
-        "x86_64-apple-darwin",
-        "x86_64-pc-windows-msvc",
-        "x86_64-apple-darwin",
-        "x86_64-pc-windows-msvc",
-        "x86_64-unknown-linux-gnu",
         "x86_64-unknown-linux-musl",
         "aarch64-unknown-linux-gnu",
         "i686-pc-windows-msvc",
         "armv7-unknown-linux-gnueabihf",
         "aarch64-apple-darwin",
         "aarch64-linux-android",
-        "arm-linux-androideabi",
         "x86_64-unknown-freebsd",
         "aarch64-unknown-linux-musl",
-        "aarch64-pc-windows-msvc"
+        "aarch64-pc-windows-msvc",
+        "armv7-linux-androideabi"
       ]
     }
   },
@@ -69,7 +63,7 @@
     "version": "napi version && conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "devDependencies": {
-    "@napi-rs/cli": "^3.0.0-alpha.62",
+    "@napi-rs/cli": "^2.18.4",
     "@swc-node/register": "^1.6.8",
     "@swc/core": "^1.3.96",
     "@taplo/cli": "^0.7.0",
