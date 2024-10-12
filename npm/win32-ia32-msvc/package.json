@@ -1,6 +1,6 @@
 {
   "name": "@antoniomuso/lz4-napi-win32-ia32-msvc",
-  "version":"2.7.0",
+  "version":"2.8.0",
   "cpu": [
     "ia32"
   ],
