@@ -65,7 +65,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-android-arm64')
+        return require('@antoniomuso/lz4-napi-android-arm64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -77,7 +77,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-android-arm-eabi')
+        return require('@antoniomuso/lz4-napi-android-arm-eabi')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -93,7 +93,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-win32-x64-msvc')
+        return require('@antoniomuso/lz4-napi-win32-x64-msvc')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -105,7 +105,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-win32-ia32-msvc')
+        return require('@antoniomuso/lz4-napi-win32-ia32-msvc')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -117,7 +117,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-win32-arm64-msvc')
+        return require('@antoniomuso/lz4-napi-win32-arm64-msvc')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -132,7 +132,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-darwin-universal')
+        return require('@antoniomuso/lz4-napi-darwin-universal')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -144,7 +144,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-darwin-x64')
+        return require('@antoniomuso/lz4-napi-darwin-x64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -156,7 +156,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-darwin-arm64')
+        return require('@antoniomuso/lz4-napi-darwin-arm64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -172,7 +172,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-freebsd-x64')
+        return require('@antoniomuso/lz4-napi-freebsd-x64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -184,7 +184,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-freebsd-arm64')
+        return require('@antoniomuso/lz4-napi-freebsd-arm64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -201,7 +201,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-linux-x64-musl')
+        return require('@antoniomuso/lz4-napi-linux-x64-musl')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -213,7 +213,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-linux-x64-gnu')
+        return require('@antoniomuso/lz4-napi-linux-x64-gnu')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -227,7 +227,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-linux-arm64-musl')
+        return require('@antoniomuso/lz4-napi-linux-arm64-musl')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -239,7 +239,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-linux-arm64-gnu')
+        return require('@antoniomuso/lz4-napi-linux-arm64-gnu')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -253,7 +253,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-linux-arm-musleabihf')
+        return require('@antoniomuso/lz4-napi-linux-arm-musleabihf')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -265,7 +265,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-linux-arm-gnueabihf')
+        return require('@antoniomuso/lz4-napi-linux-arm-gnueabihf')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -279,7 +279,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-linux-riscv64-musl')
+        return require('@antoniomuso/lz4-napi-linux-riscv64-musl')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -291,7 +291,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-linux-riscv64-gnu')
+        return require('@antoniomuso/lz4-napi-linux-riscv64-gnu')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -304,7 +304,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-linux-ppc64-gnu')
+        return require('@antoniomuso/lz4-napi-linux-ppc64-gnu')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -316,7 +316,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        return require('lz4-napi-linux-s390x-gnu')
+        return require('@antoniomuso/lz4-napi-linux-s390x-gnu')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -341,7 +341,7 @@ if (!nativeBinding || process.env.NAPI_RS_FORCE_WASI) {
   }
   if (!nativeBinding) {
     try {
-      nativeBinding = require('lz4-napi-wasm32-wasi')
+      nativeBinding = require('@antoniomuso/lz4-napi-wasm32-wasi')
     } catch (err) {
       if (process.env.NAPI_RS_FORCE_WASI) {
         loadErrors.push(err)
