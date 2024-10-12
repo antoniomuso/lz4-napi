@@ -1,6 +1,6 @@
 {
   "name": "@antoniomuso/lz4-napi-freebsd-x64",
-  "version": "2.6.0",
+  "version":"2.7.0",
   "cpu": [
     "x64"
   ],
@@ -27,7 +27,10 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "repository": "git@github.com:antoniomuso/lz4-napi.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antoniomuso/lz4-napi.git"
+  },
   "os": [
     "freebsd"
   ]

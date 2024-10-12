@@ -1,6 +1,6 @@
 {
   "name": "@antoniomuso/lz4-napi-linux-x64-musl",
-  "version": "2.6.0",
+  "version":"2.7.0",
   "cpu": [
     "x64"
   ],
@@ -19,7 +19,6 @@
     "lz4",
     "node"
   ],
-  "license": "MIT",
   "engines": {
     "node": ">= 10"
   },
@@ -27,7 +26,10 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "repository": "git@github.com:antoniomuso/lz4-napi.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antoniomuso/lz4-napi.git"
+  },
   "os": [
     "linux"
   ],
