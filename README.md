@@ -94,6 +94,7 @@ const uncompressedBuffer = await uncompress(compressedBuffer)
 
 ```ts
 (data: Buffer | string | ArrayBuffer | Uint8Array) => Promise<Buffer>
+```
 
 ### Sync
 
