@@ -84,6 +84,17 @@ const uncompressedBuffer = await uncompress(compressedBuffer)
 (data: Buffer | string | ArrayBuffer | Uint8Array, dict?: string | Buffer) => Promise<Buffer>
 ```
 
+#### `compressFrame`
+
+```ts
+(data: Buffer | string | ArrayBuffer | Uint8Array) => Promise<Buffer>
+```
+
+#### `decompressFrame`
+
+```ts
+(data: Buffer | string | ArrayBuffer | Uint8Array) => Promise<Buffer>
+
 ### Sync
 
 #### `compressSync`
