@@ -363,7 +363,9 @@ if (!nativeBinding) {
 
 module.exports.compress = nativeBinding.compress
 module.exports.compressFrame = nativeBinding.compressFrame
+module.exports.compressFrameSync = nativeBinding.compressFrameSync
 module.exports.compressSync = nativeBinding.compressSync
 module.exports.decompressFrame = nativeBinding.decompressFrame
+module.exports.decompressFrameSync = nativeBinding.decompressFrameSync
 module.exports.uncompress = nativeBinding.uncompress
 module.exports.uncompressSync = nativeBinding.uncompressSync

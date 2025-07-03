@@ -5,8 +5,10 @@ export declare function compress(
   dict?: string | Buffer | undefined | null,
 ): Promise<Buffer> | Promise<Buffer>
 export declare function compressFrame(data: string | Buffer): Promise<Buffer>
+export declare function compressFrameSync(data: string | Buffer): Buffer
 export declare function compressSync(data: string | Buffer, dict?: string | Buffer | undefined | null): Buffer
 export declare function decompressFrame(data: string | Buffer): Promise<Buffer>
+export declare function decompressFrameSync(data: string | Buffer): Buffer
 export declare function uncompress(
   data: string | Buffer,
   dict?: string | Buffer | undefined | null,
