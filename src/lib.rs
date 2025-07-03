@@ -355,33 +355,25 @@ fn decompress_frame(data: Either<String, JsBuffer>) -> Result<AsyncTask<FrameDec
 
 #[napi]
 fn compress_frame_sync(data: Either<String, Buffer>) -> Result<Buffer> {
-  use lz4_flex::frame::FrameEncoder;
-  use std::io::Write;
-
   let data_bytes: &[u8] = match data {
     Either::A(ref s) => s.as_bytes(),
     Either::B(ref b) => b.as_ref(),
   };
 
   let mut buffer = vec![];
-  {
-    let mut encoder = FrameEncoder::new(&mut buffer);
-    encoder
-      .write_all(data_bytes)
-      .map_err(|e| Error::new(napi::Status::Unknown, e.to_string()))?;
-    encoder
-      .finish()
-      .map_err(|e| Error::new(napi::Status::Unknown, e.to_string()))?;
-  }
+  let mut encoder = FrameEncoder::new(&mut buffer);
+  encoder
+    .write_all(data_bytes)
+    .map_err(|e| Error::new(napi::Status::GenericFailure, e.to_string()))?;
+  encoder
+    .finish()
+    .map_err(|e| Error::new(napi::Status::GenericFailure, e.to_string()))?;
 
   Ok(buffer.into())
 }
 
 #[napi]
 fn decompress_frame_sync(data: Either<String, Buffer>) -> Result<Buffer> {
-  use lz4_flex::frame::FrameDecoder;
-  use std::io::Read;
-
   let data_bytes: &[u8] = match data {
     Either::A(ref s) => s.as_bytes(),
     Either::B(ref b) => b.as_ref(),
@@ -391,7 +383,7 @@ fn decompress_frame_sync(data: Either<String, Buffer>) -> Result<Buffer> {
   let mut buf = vec![];
   decoder
     .read_to_end(&mut buf)
-    .map_err(|e| Error::new(napi::Status::Unknown, e.to_string()))?;
+    .map_err(|e| Error::new(napi::Status::GenericFailure, e.to_string()))?;
 
   Ok(buf.into())
 }
