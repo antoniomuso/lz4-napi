@@ -1,6 +1,6 @@
 {
-  "name": "@antoniomuso/lz4-napi-darwin-x64",
-  "version":"2.8.0",
+  "name": "@anglinb/lz4-napi-darwin-x64",
+  "version": "2.8.1-frame-sync",
   "cpu": [
     "x64"
   ],
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/antoniomuso/lz4-napi.git"
+    "url": "https://github.com/anglinb/lz4-napi.git"
   },
   "os": [
     "darwin"
