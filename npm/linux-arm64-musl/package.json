@@ -1,6 +1,6 @@
 {
-  "name": "@anglinb/lz4-napi-linux-arm64-musl",
-  "version": "2.8.1-frame-sync",
+  "name": "@antoniomuso/lz4-napi-linux-arm64-musl",
+  "version":"2.8.0",
   "cpu": [
     "arm64"
   ],
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/anglinb/lz4-napi.git"
+    "url": "https://github.com/antoniomuso/lz4-napi.git"
   },
   "os": [
     "linux"
