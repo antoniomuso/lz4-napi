@@ -1,6 +1,6 @@
 {
   "name": "@antoniomuso/lz4-napi-linux-x64-gnu",
-  "version":"2.8.0",
+  "version": "2.9.0",
   "cpu": [
     "x64"
   ],
