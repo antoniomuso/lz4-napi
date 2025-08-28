@@ -318,3 +318,121 @@ fn decompress_frame_sync(data: Either<String, Buffer>) -> Result<Buffer> {
 
   Ok(buf.into())
 }
+
+
+#[napi]
+pub struct LZ4EncoderStream {
+  buffer: Vec<u8>,
+  finished: bool,
+}
+
+#[napi]
+impl LZ4EncoderStream {
+  #[napi(constructor)]
+  pub fn new() -> Result<Self> {
+    Ok(LZ4EncoderStream {
+      buffer: Vec::new(),
+      finished: false,
+    })
+  }
+
+  #[napi]
+  pub fn write(&mut self, data: Buffer) -> Result<()> {
+    if self.finished {
+      return Err(Error::new(Status::GenericFailure, "Stream is finished"));
+    }
+
+    // Accumulate data in buffer
+    self.buffer.extend_from_slice(data.as_ref());
+    Ok(())
+  }
+
+  #[napi]
+  pub fn finish(&mut self) -> Result<Buffer> {
+    if self.finished {
+      return Err(Error::new(Status::GenericFailure, "Stream already finished"));
+    }
+
+    // Compress all accumulated data using frame format
+    let mut output = Vec::new();
+    let mut encoder = FrameEncoder::new(&mut output);
+    encoder.write_all(&self.buffer)
+      .map_err(|e| Error::new(Status::GenericFailure, e.to_string()))?;
+    encoder.finish()
+      .map_err(|e| Error::new(Status::GenericFailure, e.to_string()))?;
+    
+    self.finished = true;
+    Ok(Buffer::from(output))
+  }
+
+  #[napi]
+  pub fn is_finished(&self) -> bool {
+    self.finished
+  }
+}
+
+#[napi]
+pub struct LZ4DecoderStream {
+  buffer: Vec<u8>,
+  finished: bool,
+}
+
+#[napi]
+impl LZ4DecoderStream {
+  #[napi(constructor)]
+  pub fn new() -> Result<Self> {
+    Ok(LZ4DecoderStream {
+      buffer: Vec::new(),
+      finished: false,
+    })
+  }
+
+  #[napi]
+  pub fn write(&mut self, data: Buffer) -> Result<Buffer> {
+    if self.finished {
+      return Err(Error::new(Status::GenericFailure, "Stream is finished"));
+    }
+
+    // Accumulate data in buffer
+    self.buffer.extend_from_slice(data.as_ref());
+
+    // Try to decompress the accumulated data
+    let mut decoder = FrameDecoder::new(self.buffer.as_slice());
+    let mut output = Vec::new();
+    
+    match decoder.read_to_end(&mut output) {
+      Ok(_) => {
+        self.finished = true;
+        Ok(Buffer::from(output))
+      }
+      Err(e) => {
+        // If we can't read everything yet, it might be because we need more data
+        if e.kind() == std::io::ErrorKind::UnexpectedEof {
+          Ok(Buffer::from(vec![]))
+        } else {
+          Err(Error::new(Status::GenericFailure, e.to_string()))
+        }
+      }
+    }
+  }
+
+  #[napi]
+  pub fn finish(&mut self) -> Result<Buffer> {
+    if self.finished {
+      return Ok(Buffer::from(vec![]));
+    }
+
+    let mut decoder = FrameDecoder::new(self.buffer.as_slice());
+    let mut output = Vec::new();
+    decoder.read_to_end(&mut output)
+      .map_err(|e| Error::new(Status::GenericFailure, e.to_string()))?;
+    
+    self.finished = true;
+    Ok(Buffer::from(output))
+  }
+
+  #[napi]
+  pub fn is_finished(&self) -> bool {
+    self.finished
+  }
+}

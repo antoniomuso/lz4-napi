@@ -508,6 +508,10 @@ if (!nativeBinding) {
 }
 
 module.exports = nativeBinding
+module.exports.Lz4DecoderStream = nativeBinding.Lz4DecoderStream
+module.exports.LZ4DecoderStream = nativeBinding.LZ4DecoderStream
+module.exports.Lz4EncoderStream = nativeBinding.Lz4EncoderStream
+module.exports.LZ4EncoderStream = nativeBinding.LZ4EncoderStream
 module.exports.compress = nativeBinding.compress
 module.exports.compressFrame = nativeBinding.compressFrame
 module.exports.compressFrameSync = nativeBinding.compressFrameSync
