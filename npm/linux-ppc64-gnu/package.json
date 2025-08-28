@@ -1,12 +1,12 @@
 {
-  "name": "@antoniomuso/lz4-napi-linux-arm-gnueabihf",
+  "name": "@antoniomuso/lz4-napi-linux-ppc64-gnu",
   "version": "2.9.0",
   "cpu": [
-    "arm"
+    "ppc64"
   ],
-  "main": "lz4-napi.linux-arm-gnueabihf.node",
+  "main": "lz4-napi.linux-ppc64-gnu.node",
   "files": [
-    "lz4-napi.linux-arm-gnueabihf.node"
+    "lz4-napi.linux-ppc64-gnu.node"
   ],
   "description": "Fastest lz4 compression library in Node.js, powered by napi-rs and lz4-flex.",
   "keywords": [
@@ -33,5 +33,8 @@
   },
   "os": [
     "linux"
+  ],
+  "libc": [
+    "glibc"
   ]
 }

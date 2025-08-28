@@ -1,12 +1,12 @@
 {
-  "name": "@antoniomuso/lz4-napi-linux-arm-gnueabihf",
+  "name": "@antoniomuso/lz4-napi-openharmony-arm64",
   "version": "2.9.0",
   "cpu": [
-    "arm"
+    "arm64"
   ],
-  "main": "lz4-napi.linux-arm-gnueabihf.node",
+  "main": "lz4-napi.openharmony-arm64.node",
   "files": [
-    "lz4-napi.linux-arm-gnueabihf.node"
+    "lz4-napi.openharmony-arm64.node"
   ],
   "description": "Fastest lz4 compression library in Node.js, powered by napi-rs and lz4-flex.",
   "keywords": [
@@ -32,6 +32,6 @@
     "access": "public"
   },
   "os": [
-    "linux"
+    "openharmony"
   ]
 }
