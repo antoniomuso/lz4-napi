@@ -7,10 +7,12 @@ import { Transform, TransformOptions } from 'stream'
 // Node.js Transform streams (high-level API)
 export declare class EncoderStream extends Transform {
   constructor(options?: TransformOptions)
+  isFinished(): boolean
 }
 
 export declare class DecoderStream extends Transform {
   constructor(options?: TransformOptions)
+  isFinished(): boolean
 }
 
 export declare function createEncoderStream(options?: TransformOptions): EncoderStream
