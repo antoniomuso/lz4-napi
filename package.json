@@ -56,7 +56,7 @@
   },
   "scripts": {
     "artifacts": "napi artifacts --output-dir artifacts --npm-dir ./npm",
-    "bench": "node -r @swc-node/register benchmark/bench.ts",
+    "bench": "node --import @oxc-node/core/register benchmark/bench.ts",
     "build": "napi build --platform --release",
     "build:debug": "napi build --platform",
     "format": "run-p format:source format:rs format:toml",
@@ -72,7 +72,7 @@
   },
   "devDependencies": {
     "@napi-rs/cli": "^3.1.5",
-    "@swc-node/register": "^1.6.8",
+    "@oxc-node/core": "^0.0.32",
     "@swc/core": "^1.3.96",
     "@taplo/cli": "^0.7.0",
     "@types/node": "^24.3.0",
@@ -91,7 +91,7 @@
     "npm-run-all2": "^6.2.2",
     "prettier": "^3.3.3",
     "pretty-bytes": "^6.1.1",
-    "snappy": "^7.2.2",
+    "snappy": "^7.3.2",
     "table": "^6.8.2",
     "typescript": "^5.5.4"
   },
@@ -114,11 +114,12 @@
     ]
   },
   "ava": {
-    "require": [
-      "@swc-node/register"
-    ],
-    "extensions": [
-      "ts"
+    "extensions": {
+      "ts": "module"
+    },
+    "nodeArguments": [
+      "--import",
+      "@oxc-node/core/register"
     ],
     "timeout": "2m",
     "workerThreads": false,
