@@ -120,18 +120,6 @@ const uncompressedBuffer = await uncompress(compressedBuffer)
 ```ts
 (data: Buffer | string | ArrayBuffer | Uint8Array) => Buffer
 ```
-#### `compressFrame`
-
-```ts
-(data: Buffer | string | ArrayBuffer | Uint8Array) => Promise<Buffer>
-```
-
-#### `decompressFrame`
-
-```ts
-(data: Buffer | string | ArrayBuffer | Uint8Array) => Promise<Buffer>
-```
-
 
 ## Performance
 
