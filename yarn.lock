@@ -869,93 +869,130 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-android-arm-eabi@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-android-arm-eabi@npm:7.2.2"
+"@napi-rs/snappy-android-arm-eabi@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-android-arm-eabi@npm:7.3.2"
   conditions: os=android & cpu=arm
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-android-arm64@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-android-arm64@npm:7.2.2"
+"@napi-rs/snappy-android-arm64@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-android-arm64@npm:7.3.2"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-darwin-arm64@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-darwin-arm64@npm:7.2.2"
+"@napi-rs/snappy-darwin-arm64@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-darwin-arm64@npm:7.3.2"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-darwin-x64@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-darwin-x64@npm:7.2.2"
+"@napi-rs/snappy-darwin-x64@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-darwin-x64@npm:7.3.2"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-freebsd-x64@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-freebsd-x64@npm:7.2.2"
+"@napi-rs/snappy-freebsd-x64@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-freebsd-x64@npm:7.3.2"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-linux-arm-gnueabihf@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-linux-arm-gnueabihf@npm:7.2.2"
+"@napi-rs/snappy-linux-arm-gnueabihf@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-linux-arm-gnueabihf@npm:7.3.2"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-linux-arm64-gnu@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-linux-arm64-gnu@npm:7.2.2"
-  conditions: os=linux & cpu=arm64
+"@napi-rs/snappy-linux-arm64-gnu@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-linux-arm64-gnu@npm:7.3.2"
+  conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-linux-arm64-musl@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-linux-arm64-musl@npm:7.2.2"
-  conditions: os=linux & cpu=arm64
+"@napi-rs/snappy-linux-arm64-musl@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-linux-arm64-musl@npm:7.3.2"
+  conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-linux-x64-gnu@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-linux-x64-gnu@npm:7.2.2"
-  conditions: os=linux & cpu=x64
+"@napi-rs/snappy-linux-ppc64-gnu@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-linux-ppc64-gnu@npm:7.3.2"
+  conditions: os=linux & cpu=ppc64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-linux-x64-musl@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-linux-x64-musl@npm:7.2.2"
-  conditions: os=linux & cpu=x64
+"@napi-rs/snappy-linux-riscv64-gnu@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-linux-riscv64-gnu@npm:7.3.2"
+  conditions: os=linux & cpu=riscv64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-win32-arm64-msvc@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-win32-arm64-msvc@npm:7.2.2"
+"@napi-rs/snappy-linux-s390x-gnu@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-linux-s390x-gnu@npm:7.3.2"
+  conditions: os=linux & cpu=s390x & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@napi-rs/snappy-linux-x64-gnu@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-linux-x64-gnu@npm:7.3.2"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@napi-rs/snappy-linux-x64-musl@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-linux-x64-musl@npm:7.3.2"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@napi-rs/snappy-openharmony-arm64@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-openharmony-arm64@npm:7.3.2"
+  conditions: os=openharmony & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@napi-rs/snappy-wasm32-wasi@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-wasm32-wasi@npm:7.3.2"
+  dependencies:
+    "@napi-rs/wasm-runtime": "npm:^1.0.3"
+  conditions: cpu=wasm32
+  languageName: node
+  linkType: hard
+
+"@napi-rs/snappy-win32-arm64-msvc@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-win32-arm64-msvc@npm:7.3.2"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-win32-ia32-msvc@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-win32-ia32-msvc@npm:7.2.2"
+"@napi-rs/snappy-win32-ia32-msvc@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-win32-ia32-msvc@npm:7.3.2"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@napi-rs/snappy-win32-x64-msvc@npm:7.2.2":
-  version: 7.2.2
-  resolution: "@napi-rs/snappy-win32-x64-msvc@npm:7.2.2"
+"@napi-rs/snappy-win32-x64-msvc@npm:7.3.2":
+  version: 7.3.2
+  resolution: "@napi-rs/snappy-win32-x64-msvc@npm:7.3.2"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -1450,6 +1487,188 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@oxc-node/core-android-arm-eabi@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-android-arm-eabi@npm:0.0.32"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-android-arm64@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-android-arm64@npm:0.0.32"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-darwin-arm64@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-darwin-arm64@npm:0.0.32"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-darwin-x64@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-darwin-x64@npm:0.0.32"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-freebsd-x64@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-freebsd-x64@npm:0.0.32"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-linux-arm-gnueabihf@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-linux-arm-gnueabihf@npm:0.0.32"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-linux-arm64-gnu@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-linux-arm64-gnu@npm:0.0.32"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-linux-arm64-musl@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-linux-arm64-musl@npm:0.0.32"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-linux-ppc64-gnu@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-linux-ppc64-gnu@npm:0.0.32"
+  conditions: os=linux & cpu=ppc64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-linux-s390x-gnu@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-linux-s390x-gnu@npm:0.0.32"
+  conditions: os=linux & cpu=s390x & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-linux-x64-gnu@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-linux-x64-gnu@npm:0.0.32"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-linux-x64-musl@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-linux-x64-musl@npm:0.0.32"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-openharmony-arm64@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-openharmony-arm64@npm:0.0.32"
+  conditions: os=openharmony & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-wasm32-wasi@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-wasm32-wasi@npm:0.0.32"
+  dependencies:
+    "@napi-rs/wasm-runtime": "npm:^1.0.3"
+  conditions: cpu=wasm32
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-win32-arm64-msvc@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-win32-arm64-msvc@npm:0.0.32"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-win32-ia32-msvc@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-win32-ia32-msvc@npm:0.0.32"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core-win32-x64-msvc@npm:0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core-win32-x64-msvc@npm:0.0.32"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@oxc-node/core@npm:^0.0.32":
+  version: 0.0.32
+  resolution: "@oxc-node/core@npm:0.0.32"
+  dependencies:
+    "@oxc-node/core-android-arm-eabi": "npm:0.0.32"
+    "@oxc-node/core-android-arm64": "npm:0.0.32"
+    "@oxc-node/core-darwin-arm64": "npm:0.0.32"
+    "@oxc-node/core-darwin-x64": "npm:0.0.32"
+    "@oxc-node/core-freebsd-x64": "npm:0.0.32"
+    "@oxc-node/core-linux-arm-gnueabihf": "npm:0.0.32"
+    "@oxc-node/core-linux-arm64-gnu": "npm:0.0.32"
+    "@oxc-node/core-linux-arm64-musl": "npm:0.0.32"
+    "@oxc-node/core-linux-ppc64-gnu": "npm:0.0.32"
+    "@oxc-node/core-linux-s390x-gnu": "npm:0.0.32"
+    "@oxc-node/core-linux-x64-gnu": "npm:0.0.32"
+    "@oxc-node/core-linux-x64-musl": "npm:0.0.32"
+    "@oxc-node/core-openharmony-arm64": "npm:0.0.32"
+    "@oxc-node/core-wasm32-wasi": "npm:0.0.32"
+    "@oxc-node/core-win32-arm64-msvc": "npm:0.0.32"
+    "@oxc-node/core-win32-ia32-msvc": "npm:0.0.32"
+    "@oxc-node/core-win32-x64-msvc": "npm:0.0.32"
+    pirates: "npm:^4.0.7"
+  dependenciesMeta:
+    "@oxc-node/core-android-arm-eabi":
+      optional: true
+    "@oxc-node/core-android-arm64":
+      optional: true
+    "@oxc-node/core-darwin-arm64":
+      optional: true
+    "@oxc-node/core-darwin-x64":
+      optional: true
+    "@oxc-node/core-freebsd-x64":
+      optional: true
+    "@oxc-node/core-linux-arm-gnueabihf":
+      optional: true
+    "@oxc-node/core-linux-arm64-gnu":
+      optional: true
+    "@oxc-node/core-linux-arm64-musl":
+      optional: true
+    "@oxc-node/core-linux-ppc64-gnu":
+      optional: true
+    "@oxc-node/core-linux-s390x-gnu":
+      optional: true
+    "@oxc-node/core-linux-x64-gnu":
+      optional: true
+    "@oxc-node/core-linux-x64-musl":
+      optional: true
+    "@oxc-node/core-openharmony-arm64":
+      optional: true
+    "@oxc-node/core-wasm32-wasi":
+      optional: true
+    "@oxc-node/core-win32-arm64-msvc":
+      optional: true
+    "@oxc-node/core-win32-ia32-msvc":
+      optional: true
+    "@oxc-node/core-win32-x64-msvc":
+      optional: true
+  checksum: 10/f463dc6905540fbab75d8fad7585959a1f72586c62a7ee4fe30cc583e3b56b6de751cb57c8b1e81aa4b82b21474db0d1c488e99ce7e62d3e776bf4cada4fac8b
+  languageName: node
+  linkType: hard
+
 "@rollup/pluginutils@npm:^4.0.0":
   version: 4.2.1
   resolution: "@rollup/pluginutils@npm:4.2.1"
@@ -1464,43 +1683,6 @@ __metadata:
   version: 2.3.0
   resolution: "@sindresorhus/merge-streams@npm:2.3.0"
   checksum: 10/798bcb53cd1ace9df84fcdd1ba86afdc9e0cd84f5758d26ae9b1eefd8e8887e5fc30051132b9e74daf01bb41fa5a2faf1369361f83d76a3b3d7ee938058fd71c
-  languageName: node
-  linkType: hard
-
-"@swc-node/core@npm:^1.13.0":
-  version: 1.13.0
-  resolution: "@swc-node/core@npm:1.13.0"
-  peerDependencies:
-    "@swc/core": ">= 1.3"
-    "@swc/types": ">= 0.1"
-  checksum: 10/06f5634038346fbceeb18ef44c2d6e28c499da44fe775f84199afd7db358a548127573af92ff84f6b4913cdd69047a492e0dc2cbe0830444023743cd33fe1970
-  languageName: node
-  linkType: hard
-
-"@swc-node/register@npm:^1.6.8":
-  version: 1.9.0
-  resolution: "@swc-node/register@npm:1.9.0"
-  dependencies:
-    "@swc-node/core": "npm:^1.13.0"
-    "@swc-node/sourcemap-support": "npm:^0.5.0"
-    colorette: "npm:^2.0.20"
-    debug: "npm:^4.3.4"
-    pirates: "npm:^4.0.6"
-    tslib: "npm:^2.6.2"
-  peerDependencies:
-    "@swc/core": ">= 1.3"
-    typescript: ">= 4.3"
-  checksum: 10/991db9154786f67e58ffe237c78fde2d2104c1af1ec455e55b7ab9a28615f10b478bf150a26fe44783727f55ab78afab91b577587a2ad1cad0ad2725fd9c1053
-  languageName: node
-  linkType: hard
-
-"@swc-node/sourcemap-support@npm:^0.5.0":
-  version: 0.5.0
-  resolution: "@swc-node/sourcemap-support@npm:0.5.0"
-  dependencies:
-    source-map-support: "npm:^0.5.21"
-    tslib: "npm:^2.6.2"
-  checksum: 10/4163bd5b6730ed395efa70df43a2a1ec6604a23dd70992d8a329c3bff7f8ef42fa04a090145f2c1471ae398602e8b4bf3d4d95c6d66c81cdb609a54538553d9d
   languageName: node
   linkType: hard
 
@@ -2313,13 +2495,6 @@ __metadata:
   dependencies:
     fill-range: "npm:^7.1.1"
   checksum: 10/fad11a0d4697a27162840b02b1fad249c1683cbc510cd5bf1a471f2f8085c046d41094308c577a50a03a579dd99d5a6b3724c4b5e8b14df2c4443844cfcda2c6
-  languageName: node
-  linkType: hard
-
-"buffer-from@npm:^1.0.0":
-  version: 1.1.2
-  resolution: "buffer-from@npm:1.1.2"
-  checksum: 10/0448524a562b37d4d7ed9efd91685a5b77a50672c556ea254ac9a6d30e3403a517d8981f10e565db24e8339413b43c97ca2951f10e399c6125a0d8911f5679bb
   languageName: node
   linkType: hard
 
@@ -4749,7 +4924,7 @@ __metadata:
   dependencies:
     "@napi-rs/cli": "npm:^3.1.5"
     "@node-rs/helper": "npm:^1.3.3"
-    "@swc-node/register": "npm:^1.6.8"
+    "@oxc-node/core": "npm:^0.0.32"
     "@swc/core": "npm:^1.3.96"
     "@taplo/cli": "npm:^0.7.0"
     "@types/node": "npm:^24.3.0"
@@ -4768,7 +4943,7 @@ __metadata:
     npm-run-all2: "npm:^6.2.2"
     prettier: "npm:^3.3.3"
     pretty-bytes: "npm:^6.1.1"
-    snappy: "npm:^7.2.2"
+    snappy: "npm:^7.3.2"
     table: "npm:^6.8.2"
     typescript: "npm:^5.5.4"
   languageName: unknown
@@ -5355,10 +5530,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pirates@npm:^4.0.6":
-  version: 4.0.6
-  resolution: "pirates@npm:4.0.6"
-  checksum: 10/d02dda76f4fec1cbdf395c36c11cf26f76a644f9f9a1bfa84d3167d0d3154d5289aacc72677aa20d599bb4a6937a471de1b65c995e2aea2d8687cbcd7e43ea5f
+"pirates@npm:^4.0.7":
+  version: 4.0.7
+  resolution: "pirates@npm:4.0.7"
+  checksum: 10/2427f371366081ae42feb58214f04805d6b41d6b84d74480ebcc9e0ddbd7105a139f7c653daeaf83ad8a1a77214cf07f64178e76de048128fec501eab3305a96
   languageName: node
   linkType: hard
 
@@ -5825,23 +6000,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"snappy@npm:^7.2.2":
-  version: 7.2.2
-  resolution: "snappy@npm:7.2.2"
+"snappy@npm:^7.3.2":
+  version: 7.3.2
+  resolution: "snappy@npm:7.3.2"
   dependencies:
-    "@napi-rs/snappy-android-arm-eabi": "npm:7.2.2"
-    "@napi-rs/snappy-android-arm64": "npm:7.2.2"
-    "@napi-rs/snappy-darwin-arm64": "npm:7.2.2"
-    "@napi-rs/snappy-darwin-x64": "npm:7.2.2"
-    "@napi-rs/snappy-freebsd-x64": "npm:7.2.2"
-    "@napi-rs/snappy-linux-arm-gnueabihf": "npm:7.2.2"
-    "@napi-rs/snappy-linux-arm64-gnu": "npm:7.2.2"
-    "@napi-rs/snappy-linux-arm64-musl": "npm:7.2.2"
-    "@napi-rs/snappy-linux-x64-gnu": "npm:7.2.2"
-    "@napi-rs/snappy-linux-x64-musl": "npm:7.2.2"
-    "@napi-rs/snappy-win32-arm64-msvc": "npm:7.2.2"
-    "@napi-rs/snappy-win32-ia32-msvc": "npm:7.2.2"
-    "@napi-rs/snappy-win32-x64-msvc": "npm:7.2.2"
+    "@napi-rs/snappy-android-arm-eabi": "npm:7.3.2"
+    "@napi-rs/snappy-android-arm64": "npm:7.3.2"
+    "@napi-rs/snappy-darwin-arm64": "npm:7.3.2"
+    "@napi-rs/snappy-darwin-x64": "npm:7.3.2"
+    "@napi-rs/snappy-freebsd-x64": "npm:7.3.2"
+    "@napi-rs/snappy-linux-arm-gnueabihf": "npm:7.3.2"
+    "@napi-rs/snappy-linux-arm64-gnu": "npm:7.3.2"
+    "@napi-rs/snappy-linux-arm64-musl": "npm:7.3.2"
+    "@napi-rs/snappy-linux-ppc64-gnu": "npm:7.3.2"
+    "@napi-rs/snappy-linux-riscv64-gnu": "npm:7.3.2"
+    "@napi-rs/snappy-linux-s390x-gnu": "npm:7.3.2"
+    "@napi-rs/snappy-linux-x64-gnu": "npm:7.3.2"
+    "@napi-rs/snappy-linux-x64-musl": "npm:7.3.2"
+    "@napi-rs/snappy-openharmony-arm64": "npm:7.3.2"
+    "@napi-rs/snappy-wasm32-wasi": "npm:7.3.2"
+    "@napi-rs/snappy-win32-arm64-msvc": "npm:7.3.2"
+    "@napi-rs/snappy-win32-ia32-msvc": "npm:7.3.2"
+    "@napi-rs/snappy-win32-x64-msvc": "npm:7.3.2"
   dependenciesMeta:
     "@napi-rs/snappy-android-arm-eabi":
       optional: true
@@ -5859,9 +6039,19 @@ __metadata:
       optional: true
     "@napi-rs/snappy-linux-arm64-musl":
       optional: true
+    "@napi-rs/snappy-linux-ppc64-gnu":
+      optional: true
+    "@napi-rs/snappy-linux-riscv64-gnu":
+      optional: true
+    "@napi-rs/snappy-linux-s390x-gnu":
+      optional: true
     "@napi-rs/snappy-linux-x64-gnu":
       optional: true
     "@napi-rs/snappy-linux-x64-musl":
+      optional: true
+    "@napi-rs/snappy-openharmony-arm64":
+      optional: true
+    "@napi-rs/snappy-wasm32-wasi":
       optional: true
     "@napi-rs/snappy-win32-arm64-msvc":
       optional: true
@@ -5869,21 +6059,11 @@ __metadata:
       optional: true
     "@napi-rs/snappy-win32-x64-msvc":
       optional: true
-  checksum: 10/cc6ee627d32325c3b3a7220f57bf7f87906372431072b77dfacf5d875a21c54043df8d6f328eadf8d58bda3d9bb558b3f00e1daaa757441cfa1ec20004f715f1
+  checksum: 10/1e71624fcde9d69700ef09fa7c715c02f53f2e3353590b1dbf046031901245075285c124a7ff369b0776f89024d5adef4086e010889f81a1e8913163b5f9fa7a
   languageName: node
   linkType: hard
 
-"source-map-support@npm:^0.5.21":
-  version: 0.5.21
-  resolution: "source-map-support@npm:0.5.21"
-  dependencies:
-    buffer-from: "npm:^1.0.0"
-    source-map: "npm:^0.6.0"
-  checksum: 10/8317e12d84019b31e34b86d483dd41d6f832f389f7417faf8fc5c75a66a12d9686e47f589a0554a868b8482f037e23df9d040d29387eb16fa14cb85f091ba207
-  languageName: node
-  linkType: hard
-
-"source-map@npm:^0.6.0, source-map@npm:^0.6.1":
+"source-map@npm:^0.6.1":
   version: 0.6.1
   resolution: "source-map@npm:0.6.1"
   checksum: 10/59ef7462f1c29d502b3057e822cdbdae0b0e565302c4dd1a95e11e793d8d9d62006cdc10e0fd99163ca33ff2071360cf50ee13f90440806e7ed57d81cba2f7ff
@@ -6216,13 +6396,6 @@ __metadata:
   version: 2.7.0
   resolution: "tslib@npm:2.7.0"
   checksum: 10/9a5b47ddac65874fa011c20ff76db69f97cf90c78cff5934799ab8894a5342db2d17b4e7613a087046bc1d133d21547ddff87ac558abeec31ffa929c88b7fce6
-  languageName: node
-  linkType: hard
-
-"tslib@npm:^2.6.2":
-  version: 2.6.2
-  resolution: "tslib@npm:2.6.2"
-  checksum: 10/bd26c22d36736513980091a1e356378e8b662ded04204453d353a7f34a4c21ed0afc59b5f90719d4ba756e581a162ecbf93118dc9c6be5acf70aa309188166ca
   languageName: node
   linkType: hard
 

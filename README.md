@@ -109,6 +109,29 @@ const uncompressedBuffer = await uncompress(compressedBuffer)
 ```ts
 (data: Buffer | string | ArrayBuffer | Uint8Array, dict?: string | Buffer) => Buffer
 ```
+#### `compressFrameSync`
+
+```ts
+(data: Buffer | string | ArrayBuffer | Uint8Array) => Buffer
+```
+
+#### `decompressFrameSync`
+
+```ts
+(data: Buffer | string | ArrayBuffer | Uint8Array) => Buffer
+```
+#### `compressFrame`
+
+```ts
+(data: Buffer | string | ArrayBuffer | Uint8Array) => Promise<Buffer>
+```
+
+#### `decompressFrame`
+
+```ts
+(data: Buffer | string | ArrayBuffer | Uint8Array) => Promise<Buffer>
+```
+
 
 ## Performance
 
@@ -116,10 +139,9 @@ const uncompressedBuffer = await uncompress(compressedBuffer)
 
 Benchmarks runs on the following hardware:
 
-- Processor Name: i9 9900K
-- Total Number of Cores: 8
-- Hyper-Threading Technology: Enabled
-- Memory: 32 GB
+- Processor Name: M4 pro
+- Total Number of Cores: 12
+- Memory: 24GB
 
 ### Benchmark
 
@@ -128,45 +150,50 @@ Running "Compress" suite...
 Progress: 100%
 
   lz4:
-    911 ops/s, ±18.64%     | 54.68% slower
+    7 355 ops/s, ±1.73%   | 0.39% slower
+
+  lz4 dict:
+    6 375 ops/s, ±0.29%   | 13.66% slower
 
   snappy:
-    2 010 ops/s, ±19.23%   | fastest
+    7 384 ops/s, ±0.53%   | fastest
 
   gzip:
-    78 ops/s, ±18.76%      | 96.12% slower
+    444 ops/s, ±0.50%     | 93.99% slower
 
   deflate:
-    118 ops/s, ±20.42%     | 94.13% slower
+    442 ops/s, ±0.62%     | 94.01% slower
 
   brotli:
-    6 ops/s, ±0.21%       | slowest, 99.7% slower
+    6 ops/s, ±0.73%       | slowest, 99.92% slower
 
-Finished 5 cases!
+Finished 6 cases!
   Fastest: snappy
   Slowest: brotli
 Running "Decompress" suite...
 Progress: 100%
 
   lz4:
-    9 425 ops/s, ±12.50%   | fastest
+    19 095 ops/s, ±1.51%   | fastest
+
+  lz4 dict:
+    17 644 ops/s, ±1.51%   | 7.6% slower
 
   snappy:
-    3 900 ops/s, ±13.39%   | 58.62% slower
+    14 424 ops/s, ±0.50%   | 24.46% slower
 
   gzip:
-    823 ops/s, ±20.48%     | slowest, 91.27% slower
+    2 442 ops/s, ±0.60%    | 87.21% slower
 
   deflate:
-    1 350 ops/s, ±12.52%   | 85.68% slower
+    2 467 ops/s, ±0.61%    | 87.08% slower
 
   brotli:
-    979 ops/s, ±11.55%     | 89.61% slower
+    1 659 ops/s, ±0.43%    | slowest, 91.31% slower
 
-Finished 5 cases!
+Finished 6 cases!
   Fastest: lz4
-  Slowest: gzip
-Done in 61.20s.
+  Slowest: brotli
 ```
 
 <!-- CONTRIBUTING -->

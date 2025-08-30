@@ -1,4 +1,5 @@
 import { readFileSync } from 'fs'
+import { fileURLToPath } from 'node:url'
 import { join } from 'path'
 import { promisify } from 'util'
 import {
@@ -25,8 +26,8 @@ const gunzipAsync = promisify(gunzip)
 const inflateAsync = promisify(inflate)
 const brotliDecompressAsync = promisify(brotliDecompress)
 
-const FIXTURE = readFileSync(join(__dirname, '..', 'yarn.lock'))
-const FIXTURE_DICT = readFileSync(join(__dirname, '..', '__test__/dict.bin'))
+const FIXTURE = readFileSync(join(fileURLToPath(import.meta.url), '..', '..', 'yarn.lock'))
+const FIXTURE_DICT = readFileSync(join(fileURLToPath(import.meta.url), '..', '..', '__test__/dict.bin'))
 const LZ4_COMPRESSED_FIXTURE = Buffer.from(compressSync(FIXTURE))
 const SNAPPY_COMPRESSED_FIXTURE = Buffer.from(snappy.compressSync(FIXTURE))
 const GZIP_FIXTURE = gzipSync(FIXTURE)

@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
+    "target": "esnext",
     "strict": true,
     "moduleResolution": "node",
-    "module": "CommonJS",
+    "module": "esnext",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "esModuleInterop": true,
