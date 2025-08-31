@@ -373,7 +373,7 @@ function requireNative() {
         }
         try {
           const binding = require('@antoniomuso/lz4-napi-linux-riscv64-gnu')
-          const bindingPackageVersion = require('lz4-napi-linux-riscv64-gnu/package.json').version
+          const bindingPackageVersion = require('@antoniomuso/lz4-napi-linux-riscv64-gnu/package.json').version
           if (bindingPackageVersion !== '2.9.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
             throw new Error(`Native binding package version mismatch, expected 2.9.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
           }

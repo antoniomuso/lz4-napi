@@ -32,40 +32,40 @@ jobs:
         settings:
           - host: macos-latest
             target: x86_64-apple-darwin
-            build: yarn build --target x86_64-apple-darwin
+            build: yarn build:release --target x86_64-apple-darwin
           - host: windows-latest
-            build: yarn build --target x86_64-pc-windows-msvc
+            build: yarn build:release --target x86_64-pc-windows-msvc
             target: x86_64-pc-windows-msvc
           - host: windows-latest
-            build: yarn build --target i686-pc-windows-msvc
+            build: yarn build:release --target i686-pc-windows-msvc
             target: i686-pc-windows-msvc
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            build: yarn build --target x86_64-unknown-linux-gnu --use-napi-cross
+            build: yarn build:release --target x86_64-unknown-linux-gnu --use-napi-cross
           - host: ubuntu-latest
             target: x86_64-unknown-linux-musl
-            build: yarn build --target x86_64-unknown-linux-musl -x
+            build: yarn build:release --target x86_64-unknown-linux-musl -x
           - host: macos-latest
             target: aarch64-apple-darwin
-            build: yarn build --target aarch64-apple-darwin
+            build: yarn build:release --target aarch64-apple-darwin
           - host: ubuntu-latest
             target: aarch64-unknown-linux-gnu
-            build: yarn build --target aarch64-unknown-linux-gnu --use-napi-cross
+            build: yarn build:release --target aarch64-unknown-linux-gnu --use-napi-cross
           - host: ubuntu-latest
             target: armv7-unknown-linux-gnueabihf
-            build: yarn build --target armv7-unknown-linux-gnueabihf --use-napi-cross
+            build: yarn build:release --target armv7-unknown-linux-gnueabihf --use-napi-cross
           - host: ubuntu-latest
             target: aarch64-linux-android
-            build: yarn build --target aarch64-linux-android
+            build: yarn build:release --target aarch64-linux-android
           - host: ubuntu-latest
             target: armv7-linux-androideabi
-            build: yarn build --target armv7-linux-androideabi
+            build: yarn build:release --target armv7-linux-androideabi
           - host: ubuntu-latest
             target: aarch64-unknown-linux-musl
-            build: yarn build --target aarch64-unknown-linux-musl -x
+            build: yarn build:release --target aarch64-unknown-linux-musl -x
           - host: windows-latest
             target: aarch64-pc-windows-msvc
-            build: yarn build --target aarch64-pc-windows-msvc
+            build: yarn build:release --target aarch64-pc-windows-msvc
           - host: ubuntu-latest
             target: riscv64gc-unknown-linux-gnu
             build: |
@@ -74,19 +74,19 @@ jobs:
               export CC=riscv64-linux-gnu-gcc
               export TARGET_CC=riscv64-linux-gnu-gcc
               export CXX=riscv64-linux-gnu-g++
-              yarn build --target riscv64gc-unknown-linux-gnu
+              yarn build:release --target riscv64gc-unknown-linux-gnu
           - host: ubuntu-latest
             target: s390x-unknown-linux-gnu
             build: |
               export CC=clang
               export CFLAGS="-fuse-ld=lld"
-              yarn build --target s390x-unknown-linux-gnu --use-napi-cross
+              yarn build:release --target s390x-unknown-linux-gnu --use-napi-cross
           - host: ubuntu-latest
             target: powerpc64le-unknown-linux-gnu
-            build: yarn build --target powerpc64le-unknown-linux-gnu --use-napi-cross
+            build: yarn build:release --target powerpc64le-unknown-linux-gnu --use-napi-cross
           - host: ubuntu-latest
             target: aarch64-unknown-linux-ohos
-            build: yarn build --target aarch64-unknown-linux-ohos
+            build: yarn build:release --target aarch64-unknown-linux-ohos
     name: stable - ${{ matrix.settings.target }} - node@22
     runs-on: ${{ matrix.settings.host }}
     steps:
@@ -181,7 +181,7 @@ jobs:
             env
             freebsd-version
             yarn install --mode=skip-build
-            yarn build
+            yarn build:release
             rm -rf node_modules
             rm -rf target
             rm -rf .yarn/cache
