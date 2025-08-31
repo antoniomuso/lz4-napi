@@ -57,7 +57,8 @@
   "scripts": {
     "artifacts": "napi artifacts --output-dir artifacts --npm-dir ./npm",
     "bench": "node --import @oxc-node/core/register benchmark/bench.ts",
-    "build": "napi build --platform --release",
+    "build": "napi build --platform --release && yarn addNamespaces:index",
+    "build:release": "napi build --platform --release",
     "build:debug": "napi build --platform",
     "format": "run-p format:source format:rs format:toml",
     "format:toml": "taplo format",
@@ -66,6 +67,7 @@
     "lint": "eslint -c ./.eslintrc.yml .",
     "prepublishOnly": "napi prepublish -t npm && esbuild --minify --outfile=index.js --allow-overwrite index.js && yarn addNamespaces",
     "addNamespaces": "cat package.json | jq '.optionalDependencies |= with_entries(.key |= \"@antoniomuso/\" + .)' > package.json",
+    "addNamespaces:index": "node --import @oxc-node/core/register scripts/add-namespaces-index.ts", 
     "test": "ava",
     "test:mem": "node ./memory-leak-detect.mjs",
     "version": "napi version && conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
