@@ -237,10 +237,6 @@ jobs:
     name: Test ${{ matrix.target }} - node@${{ matrix.node }}
     needs:
       - build
-    # s390x runs via QEMU emulation and currently SIGSEGVs on module load;
-    # the binary itself still builds and ships. Treat as informational
-    # until the emulation regression is resolved.
-    continue-on-error: ${{ matrix.target == 's390x-unknown-linux-gnu' }}
     strategy:
       fail-fast: false
       matrix:
@@ -309,6 +305,9 @@ jobs:
       - run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
         if: ${{ !contains(matrix.target, 'aarch64') }}
       - name: Test bindings
+        # s390x runs via QEMU emulation and currently SIGSEGVs on module
+        # load; the binary itself builds and ships. Treat as informational.
+        continue-on-error: ${{ matrix.target == 's390x-unknown-linux-gnu' }}
         uses: addnab/docker-run-action@v3
         with:
           image: ${{ steps.docker.outputs.IMAGE }}
