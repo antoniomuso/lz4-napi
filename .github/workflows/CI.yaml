@@ -87,14 +87,14 @@ jobs:
           - host: ubuntu-latest
             target: aarch64-unknown-linux-ohos
             build: yarn build:release --target aarch64-unknown-linux-ohos
-    name: stable - ${{ matrix.settings.target }} - node@22
+    name: stable - ${{ matrix.settings.target }} - node@24
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v5
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: yarn
       - name: Install
         uses: dtolnay/rust-toolchain@stable
@@ -211,6 +211,7 @@ jobs:
         node:
           - '20'
           - '22'
+          - '24'
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v5
@@ -249,6 +250,7 @@ jobs:
         node:
           - '20'
           - '22'
+          - '24'
     runs-on: ${{ contains(matrix.target, 'aarch64') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     steps:
       - uses: actions/checkout@v5
@@ -316,7 +318,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: yarn
       - name: Install dependencies
         run: yarn install --mode=skip-build

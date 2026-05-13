@@ -10,9 +10,9 @@ version = "0.1.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-lz4_flex    = { version = "0.11.3" }
-napi        = { version = "3.0.0", features = ["napi5", "serde-json"] }
-napi-derive = { version = "3.0.0" }
+lz4_flex    = "0.13"
+napi        = { version = "3", features = ["napi5", "serde-json"] }
+napi-derive = "3"
 
 [target.'cfg(all(not(target_os = "linux"), not(target_family = "wasm")))'.dependencies]
 mimalloc-safe = { version = "0.1", features = ["skip_collect_on_exit"] }
@@ -21,8 +21,8 @@ mimalloc-safe = { version = "0.1", features = ["skip_collect_on_exit"] }
 mimalloc-safe = { version = "0.1", features = ["local_dynamic_tls", "skip_collect_on_exit"] }
 
 [build-dependencies]
-napi-build = "2.0.1"
+napi-build = "2"
 
 [profile.release]
-codgen-units = 1
-lto          = true
+codegen-units = 1
+lto           = true
