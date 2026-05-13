@@ -13,12 +13,12 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: 'yarn'
 
       - name: Install
@@ -36,4 +36,4 @@ jobs:
         run: cargo fmt -- --check
 
       - name: Clippy
-        run: cargo clippy
+        run: cargo clippy -- -D warnings
