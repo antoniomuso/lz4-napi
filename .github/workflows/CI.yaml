@@ -65,12 +65,7 @@ jobs:
             build: yarn build:release --target aarch64-unknown-linux-musl -x
           - host: windows-latest
             target: aarch64-pc-windows-msvc
-            build: |
-              export CC=clang-cl
-              export TARGET_CC=clang-cl
-              export CXX=clang-cl
-              export TARGET_CXX=clang-cl
-              yarn build:release --target aarch64-pc-windows-msvc
+            build: yarn build:release --target aarch64-pc-windows-msvc
           - host: ubuntu-latest
             target: riscv64gc-unknown-linux-gnu
             build: |

@@ -14,7 +14,7 @@ lz4_flex    = "0.13"
 napi        = { version = "3", features = ["napi5", "serde-json"] }
 napi-derive = "3"
 
-[target.'cfg(all(not(target_os = "linux"), not(target_family = "wasm")))'.dependencies]
+[target.'cfg(all(not(target_os = "linux"), not(target_family = "wasm"), not(all(target_os = "windows", target_arch = "aarch64"))))'.dependencies]
 mimalloc-safe = { version = "0.1", features = ["skip_collect_on_exit"] }
 
 [target.'cfg(all(target_os = "linux", not(target_env = "ohos"), not(target_env = "musl")))'.dependencies]
