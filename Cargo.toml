@@ -14,11 +14,14 @@ lz4_flex    = "0.13"
 napi        = { version = "3", features = ["napi5", "serde-json"] }
 napi-derive = "3"
 
-[target.'cfg(all(not(target_os = "linux"), not(target_family = "wasm"), not(all(target_os = "windows", target_arch = "aarch64"))))'.dependencies]
-mimalloc-safe = { version = "0.1", features = ["skip_collect_on_exit"] }
+# Pinned to 0.1.54: libmimalloc-sys2 >= 0.1.55 (pulled by mimalloc-safe >= 0.1.55)
+# ships a mimalloc that doesn't build on aarch64-pc-windows-msvc (undeclared
+# __ldar64/__stlr64 intrinsics) and segfaults at runtime on s390x.
+[target.'cfg(all(not(target_os = "linux"), not(target_family = "wasm")))'.dependencies]
+mimalloc-safe = { version = "=0.1.54", features = ["skip_collect_on_exit"] }
 
 [target.'cfg(all(target_os = "linux", not(target_env = "ohos"), not(target_env = "musl")))'.dependencies]
-mimalloc-safe = { version = "0.1", features = ["local_dynamic_tls", "skip_collect_on_exit"] }
+mimalloc-safe = { version = "=0.1.54", features = ["local_dynamic_tls", "skip_collect_on_exit"] }
 
 [build-dependencies]
 napi-build = "2"

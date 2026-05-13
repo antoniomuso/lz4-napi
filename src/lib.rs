@@ -18,8 +18,7 @@ use napi::{
 #[cfg(all(
   not(target_family = "wasm"),
   not(target_env = "ohos"),
-  not(target_env = "musl"),
-  not(all(target_os = "windows", target_arch = "aarch64"))
+  not(target_env = "musl")
 ))]
 #[global_allocator]
 static GLOBAL: mimalloc_safe::MiMalloc = mimalloc_safe::MiMalloc;
