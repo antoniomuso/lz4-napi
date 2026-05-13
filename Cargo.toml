@@ -14,14 +14,17 @@ lz4_flex    = "0.13"
 napi        = { version = "3", features = ["napi5", "serde-json"] }
 napi-derive = "3"
 
-# Pinned to 0.1.54: libmimalloc-sys2 >= 0.1.55 (pulled by mimalloc-safe >= 0.1.55)
-# ships a mimalloc that doesn't build on aarch64-pc-windows-msvc (undeclared
-# __ldar64/__stlr64 intrinsics) and segfaults at runtime on s390x.
+# Pinned: libmimalloc-sys2 0.1.55 ships a mimalloc that doesn't build on
+# aarch64-pc-windows-msvc (undeclared __ldar64/__stlr64 intrinsics) and
+# segfaults at runtime on s390x. Pin both crates to the versions that were
+# green on main until upstream fixes the regressions.
 [target.'cfg(all(not(target_os = "linux"), not(target_family = "wasm")))'.dependencies]
-mimalloc-safe = { version = "=0.1.54", features = ["skip_collect_on_exit"] }
+mimalloc-safe    = { version = "=0.1.54", features = ["skip_collect_on_exit"] }
+libmimalloc-sys2 = "=0.1.50"
 
 [target.'cfg(all(target_os = "linux", not(target_env = "ohos"), not(target_env = "musl")))'.dependencies]
-mimalloc-safe = { version = "=0.1.54", features = ["local_dynamic_tls", "skip_collect_on_exit"] }
+mimalloc-safe    = { version = "=0.1.54", features = ["local_dynamic_tls", "skip_collect_on_exit"] }
+libmimalloc-sys2 = "=0.1.50"
 
 [build-dependencies]
 napi-build = "2"
