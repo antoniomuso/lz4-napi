@@ -313,13 +313,37 @@ jobs:
           image: ${{ steps.docker.outputs.IMAGE }}
           options: -v ${{ github.workspace }}:${{ github.workspace }} -w ${{ github.workspace }} --platform ${{ steps.docker.outputs.PLATFORM }}
           run: yarn test
-  publish:
-    name: Publish
+  check-release:
+    name: Check release commit
     runs-on: ubuntu-latest
+    # Only pushes to main can be releases. Gating here stops the environment-protected
+    # publish job (and its approval prompt) from running on PRs or non-release commits.
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     needs:
       - build-freebsd
       - test-macOS-windows-binding
       - test-linux-binding
+    outputs:
+      release: ${{ steps.check.outputs.release }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Detect version-bump commit
+        id: check
+        shell: bash
+        run: |
+          message="$(git log -1 --pretty=%B)"
+          if echo "$message" | grep -qE "^[0-9]+\.[0-9]+\.[0-9]+"; then
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          fi
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    environment: npm
+    needs:
+      - check-release
+    if: ${{ needs.check-release.outputs.release == 'true' }}
     steps:
       - uses: actions/checkout@v5
       - name: Setup node
@@ -327,6 +351,10 @@ jobs:
         with:
           node-version: 22
           cache: yarn
+      - name: Update npm for trusted publishing
+        # npm >= 11.5.1 is required for OIDC trusted publishing; Node 22 ships npm 10.x.
+        # Pin to the 11.x line so a future npm 12 can't change publish behavior here.
+        run: npm install -g "npm@^11.5.1"
       - name: Install dependencies
         run: yarn install --mode=skip-build
       - name: Download all artifacts
