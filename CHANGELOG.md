@@ -1,3 +1,22 @@
+## [2.9.1](https://github.com/antoniomuso/lz4-napi/compare/v2.9.0...v2.9.1) (2026-07-10)
+
+
+### Bug Fixes
+
+* also pin libmimalloc-sys2 to 0.1.50 ([3b3a2c7](https://github.com/antoniomuso/lz4-napi/commit/3b3a2c7eb36b43d8113ed563e17ee14a9a32a7d5))
+* **ci:** preserve gated release runs ([860776e](https://github.com/antoniomuso/lz4-napi/commit/860776e94f2617f9b7f35688b4a11e0821c7a69e))
+* pin mimalloc-safe to 0.1.54, exclude armv7 from node 24 ([2700763](https://github.com/antoniomuso/lz4-napi/commit/2700763381e2ad571914e9c7e704c0f79b422ba1))
+* **windows-aarch64:** skip mimalloc allocator ([27b436b](https://github.com/antoniomuso/lz4-napi/commit/27b436bbbf83df92199c55c093a81d57995a9b0c))
+
+
+### Features
+
+* upgrade napi to v3 stable ([c898d15](https://github.com/antoniomuso/lz4-napi/commit/c898d151e8d450fc3fe11493acfa476bd480bdab))
+
+
+### Performance Improvements
+
+* reduce native buffer copies ([2f16457](https://github.com/antoniomuso/lz4-napi/commit/2f164574ad850fc4ca77648a93b3d0b8944bc918))
 # [2.4.0](https://github.com/antoniomuso/lz4-napi/compare/v2.3.0...v2.4.0) (2024-10-10)
 
 

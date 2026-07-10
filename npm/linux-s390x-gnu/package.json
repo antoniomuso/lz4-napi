@@ -1,6 +1,6 @@
 {
   "name": "@antoniomuso/lz4-napi-linux-s390x-gnu",
-  "version": "2.9.0",
+  "version": "2.9.1",
   "cpu": [
     "s390x"
   ],
