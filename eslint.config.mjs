@@ -7,7 +7,16 @@ import globals from 'globals'
 
 export default [
   {
-    ignores: ['node_modules/**', '.yarn/**', 'target/**', 'npm/**', 'artifacts/**', 'dist/**', 'index.js', 'index.d.ts'],
+    ignores: [
+      'node_modules/**',
+      '.yarn/**',
+      'target/**',
+      'npm/**',
+      'artifacts/**',
+      'dist/**',
+      'index.js',
+      'index.d.ts',
+    ],
   },
   js.configs.recommended,
   {
