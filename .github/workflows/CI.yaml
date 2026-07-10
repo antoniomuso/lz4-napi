@@ -91,9 +91,9 @@ jobs:
     name: stable - ${{ matrix.settings.target }} - node@24
     runs-on: ${{ matrix.settings.host }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Setup node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24
           cache: yarn
@@ -103,7 +103,7 @@ jobs:
           toolchain: stable
           targets: ${{ matrix.settings.target }}
       - name: Cache cargo
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             ~/.cargo/registry/index/
@@ -126,7 +126,7 @@ jobs:
           tool: cargo-zigbuild
       - name: Setup OpenHarmony SDK
         if: ${{ contains(matrix.settings.target, 'ohos') }}
-        uses: openharmony-rs/setup-ohos-sdk@v0.2
+        uses: openharmony-rs/setup-ohos-sdk@v1
       - name: Setup toolchain
         run: ${{ matrix.settings.setup }}
         if: ${{ matrix.settings.setup }}
@@ -137,7 +137,7 @@ jobs:
         run: ${{ matrix.settings.build }}
         shell: bash
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: bindings-${{ matrix.settings.target }}
           path: |
@@ -148,10 +148,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Build FreeBSD
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Build
         id: build
-        uses: cross-platform-actions/action@v0.29.0
+        uses: cross-platform-actions/action@v1
         env:
           DEBUG: napi:*
           RUSTUP_HOME: /usr/local/rustup
@@ -187,7 +187,7 @@ jobs:
             rm -rf target
             rm -rf .yarn/cache
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: bindings-freebsd
           path: ${{ env.APP_NAME }}.*.node
@@ -215,9 +215,9 @@ jobs:
           - '24'
     runs-on: ${{ matrix.settings.host }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Setup node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: yarn
@@ -225,7 +225,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --mode=skip-build
       - name: Download artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           name: bindings-${{ matrix.settings.target }}
           path: .
@@ -258,9 +258,9 @@ jobs:
             node: '24'
     runs-on: ${{ contains(matrix.target, 'aarch64') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Setup node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: yarn
@@ -291,7 +291,7 @@ jobs:
           yarn config set --json supportedArchitectures.libc '["current", "musl", "gnu"]'
           yarn install
       - name: Download artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           name: bindings-${{ matrix.target }}
           path: .
@@ -299,7 +299,7 @@ jobs:
         run: ls -R .
         shell: bash
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
         if: ${{ !contains(matrix.target, 'aarch64') }}
         with:
           platforms: all
@@ -327,7 +327,7 @@ jobs:
     outputs:
       release: ${{ steps.check.outputs.release }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Detect version-bump commit
         id: check
         shell: bash
@@ -346,9 +346,9 @@ jobs:
       - check-release
     if: ${{ needs.check-release.outputs.release == 'true' }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Setup node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: yarn
@@ -359,7 +359,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --mode=skip-build
       - name: Download all artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           path: artifacts
       - name: Move artifacts
