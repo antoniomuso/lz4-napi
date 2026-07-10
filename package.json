@@ -8,20 +8,8 @@
     "url": "https://github.com/antoniomuso/lz4-napi.git"
   },
   "license": "MIT",
-  "keywords": [
-    "napi-rs",
-    "NAPI",
-    "N-API",
-    "Rust",
-    "node-addon",
-    "node-addon-api",
-    "lz4",
-    "node"
-  ],
-  "files": [
-    "index.d.ts",
-    "index.js"
-  ],
+  "keywords": ["napi-rs", "NAPI", "N-API", "Rust", "node-addon", "node-addon-api", "lz4", "node"],
+  "files": ["index.d.ts", "index.js"],
   "napi": {
     "binaryName": "lz4-napi",
     "packageName": "@antoniomuso/lz4-napi",
@@ -68,52 +56,40 @@
     "version": "napi version && conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "devDependencies": {
-    "@eslint/js": "^9.0.0",
-    "@napi-rs/cli": "^3.6.2",
+    "@eslint/js": "^9.39.4",
+    "@napi-rs/cli": "^3.7.2",
     "@oxc-node/core": "^0.1.0",
-    "@swc/core": "^1.15.33",
+    "@swc/core": "^1.15.43",
     "@taplo/cli": "^0.7.0",
-    "@types/node": "^24.10.0",
-    "@typescript-eslint/eslint-plugin": "^8.59.3",
-    "@typescript-eslint/parser": "^8.59.3",
-    "ava": "^6.0.0",
+    "@types/node": "^24.13.3",
+    "@typescript-eslint/eslint-plugin": "^8.63.0",
+    "@typescript-eslint/parser": "^8.63.0",
+    "ava": "^7.0.0",
     "benny": "^3.7.1",
     "conventional-changelog-cli": "^5.0.0",
-    "esbuild": "^0.28.0",
-    "eslint": "^9.0.0",
+    "esbuild": "^0.28.1",
+    "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
-    "globals": "^16.0.0",
+    "globals": "^17.7.0",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.4",
+    "lint-staged": "^17.0.8",
     "npm-run-all2": "^8.0.4",
-    "prettier": "^3.8.3",
+    "prettier": "^3.9.5",
     "snappy": "^7.3.3",
-    "typescript": "^5.9.0"
+    "typescript": "^5.9.3"
   },
   "lint-staged": {
-    "*.@(js|ts|tsx)": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.@(yml|yaml)": [
-      "prettier --parser yaml --write"
-    ],
-    "*.md": [
-      "prettier --parser markdown --write"
-    ],
-    "*.json": [
-      "prettier --parser json --write"
-    ]
+    "*.@(js|ts|tsx)": ["prettier --write", "eslint --fix"],
+    "*.@(yml|yaml)": ["prettier --parser yaml --write"],
+    "*.md": ["prettier --parser markdown --write"],
+    "*.json": ["prettier --parser json --write"]
   },
   "ava": {
     "extensions": {
       "ts": "module"
     },
-    "nodeArguments": [
-      "--import",
-      "@oxc-node/core/register"
-    ],
+    "nodeArguments": ["--import", "@oxc-node/core/register"],
     "timeout": "2m",
     "workerThreads": false,
     "environmentVariables": {
@@ -128,7 +104,7 @@
     "arrowParens": "always",
     "parser": "typescript"
   },
-  "packageManager": "yarn@4.9.4",
+  "packageManager": "yarn@4.17.1",
   "exports": {
     ".": {
       "import": "./index.js",
