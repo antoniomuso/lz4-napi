@@ -3,7 +3,7 @@
 #[macro_use]
 extern crate napi_derive;
 
-use std::io::{BufWriter, Read, Write};
+use std::io::{Read, Write};
 
 use lz4_flex::block::{compress_prepend_size_with_dict, decompress_size_prepended_with_dict};
 use lz4_flex::frame::{FrameDecoder, FrameEncoder};
@@ -23,6 +23,16 @@ use napi::{
 #[global_allocator]
 static GLOBAL: mimalloc_safe::MiMalloc = mimalloc_safe::MiMalloc;
 
+const FRAME_PREALLOC_THRESHOLD: usize = 4 * 1024 * 1024 + 64;
+
+fn frame_output_buffer(compressed_len: usize) -> Vec<u8> {
+  if compressed_len > FRAME_PREALLOC_THRESHOLD {
+    Vec::with_capacity(compressed_len)
+  } else {
+    Vec::new()
+  }
+}
+
 struct Enc {
   data: Either<String, Uint8Array>,
 }
@@ -41,7 +51,7 @@ impl<'a> ScopedTask<'a> for Enc {
   }
 
   fn resolve(&mut self, env: &'a Env, output: Self::Output) -> Result<Self::JsValue> {
-    BufferSlice::copy_from(env, output)
+    BufferSlice::from_data(env, output)
   }
 }
 
@@ -63,7 +73,7 @@ impl<'a> ScopedTask<'a> for Dec {
   }
 
   fn resolve(&mut self, env: &'a Env, output: Self::Output) -> Result<Self::JsValue> {
-    BufferSlice::copy_from(env, output)
+    BufferSlice::from_data(env, output)
   }
 }
 
@@ -92,7 +102,7 @@ impl<'a> ScopedTask<'a> for EncDict {
   }
 
   fn resolve(&mut self, env: &'a Env, output: Self::Output) -> Result<Self::JsValue> {
-    BufferSlice::copy_from(env, output)
+    BufferSlice::from_data(env, output)
   }
 }
 
@@ -122,7 +132,7 @@ impl<'a> ScopedTask<'a> for DecDict {
   }
 
   fn resolve(&mut self, env: &'a Env, output: Self::Output) -> Result<Self::JsValue> {
-    BufferSlice::copy_from(env, output)
+    BufferSlice::from_data(env, output)
   }
 }
 
@@ -141,7 +151,7 @@ impl<'a> ScopedTask<'a> for FrameDec {
       Either::B(ref s) => s,
     };
 
-    let mut buf = vec![];
+    let mut buf = frame_output_buffer(data.len());
 
     let mut decoder = FrameDecoder::new(data);
     decoder.read_to_end(&mut buf)?;
@@ -150,7 +160,7 @@ impl<'a> ScopedTask<'a> for FrameDec {
   }
 
   fn resolve(&mut self, env: &'a Env, output: Self::Output) -> Result<Self::JsValue> {
-    BufferSlice::copy_from(env, output)
+    BufferSlice::from_data(env, output)
   }
 }
 
@@ -171,9 +181,7 @@ impl<'a> ScopedTask<'a> for FrameEnc {
 
     let mut buffer = vec![];
 
-    let buf = BufWriter::new(&mut buffer);
-
-    let mut encoder = FrameEncoder::new(buf);
+    let mut encoder = FrameEncoder::new(&mut buffer);
 
     encoder.write_all(data)?;
 
@@ -185,7 +193,7 @@ impl<'a> ScopedTask<'a> for FrameEnc {
   }
 
   fn resolve(&mut self, env: &'a Env, output: Self::Output) -> Result<Self::JsValue> {
-    BufferSlice::copy_from(env, output)
+    BufferSlice::from_data(env, output)
   }
 }
 
@@ -311,7 +319,7 @@ fn decompress_frame_sync(data: Either<String, Buffer>) -> Result<Buffer> {
   };
 
   let mut decoder = FrameDecoder::new(data_bytes);
-  let mut buf = vec![];
+  let mut buf = frame_output_buffer(data_bytes.len());
   decoder
     .read_to_end(&mut buf)
     .map_err(|e| Error::new(napi::Status::GenericFailure, e.to_string()))?;
