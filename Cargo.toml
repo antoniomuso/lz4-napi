@@ -20,11 +20,11 @@ napi-derive = "3"
 # green on main until upstream fixes the regressions.
 [target.'cfg(all(not(target_os = "linux"), not(target_family = "wasm")))'.dependencies]
 mimalloc-safe    = { version = "=0.1.54", features = ["skip_collect_on_exit"] }
-libmimalloc-sys2 = "=0.1.50"
+libmimalloc-sys2 = "=0.1.60"
 
 [target.'cfg(all(target_os = "linux", not(target_env = "ohos"), not(target_env = "musl")))'.dependencies]
 mimalloc-safe    = { version = "=0.1.54", features = ["local_dynamic_tls", "skip_collect_on_exit"] }
-libmimalloc-sys2 = "=0.1.50"
+libmimalloc-sys2 = "=0.1.60"
 
 [build-dependencies]
 napi-build = "2"
