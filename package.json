@@ -68,7 +68,7 @@
     "benny": "^3.7.1",
     "conventional-changelog-cli": "^5.0.0",
     "esbuild": "^0.28.1",
-    "eslint": "^9.39.4",
+    "eslint": "^10.7.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "globals": "^17.7.0",
