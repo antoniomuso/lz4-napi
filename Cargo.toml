@@ -10,7 +10,7 @@ version = "0.1.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-lz4_flex    = "0.13"
+lz4_flex    = "0.14"
 napi        = { version = "3", features = ["napi5", "serde-json"] }
 napi-derive = "3"
 
