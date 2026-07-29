@@ -8,11 +8,11 @@ use std::io::{Read, Write};
 use lz4_flex::block::{compress_prepend_size_with_dict, decompress_size_prepended_with_dict};
 use lz4_flex::frame::{FrameDecoder, FrameEncoder};
 use lz4_flex::{compress_prepend_size, decompress_size_prepended};
-use napi::bindgen_prelude::{BufferSlice, Uint8Array};
 use napi::ScopedTask;
+use napi::bindgen_prelude::{BufferSlice, Uint8Array};
 use napi::{
-  bindgen_prelude::{AsyncTask, Buffer},
   Either, Env, Error, Result, Status,
+  bindgen_prelude::{AsyncTask, Buffer},
 };
 
 #[cfg(all(
