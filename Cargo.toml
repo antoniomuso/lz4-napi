@@ -18,13 +18,27 @@ napi-derive = "3"
 # aarch64-pc-windows-msvc (undeclared __ldar64/__stlr64 intrinsics) and
 # segfaults at runtime on s390x. Pin both crates to the versions that were
 # green on main until upstream fixes the regressions.
+#
+# no_opt_arch: mimalloc's CMake defaults MI_OPT_ARCH=ON on arm64, which adds
+# `-march=armv8.1-a` and inlines LSE atomics. Those are optional in ARMv8.0, so
+# the resulting binaries die with an illegal instruction on chips like the
+# Cortex-A73 (see #705). Turning it off drops mimalloc back to the ARMv8.0
+# baseline. Android lands in the first block (target_os = "android"), and old
+# ARMv8.0 phones are exactly the hardware at risk, so both blocks need it.
 [target.'cfg(all(not(target_os = "linux"), not(target_family = "wasm")))'.dependencies]
-mimalloc-safe    = { version = "=0.1.54", features = ["skip_collect_on_exit"] }
 libmimalloc-sys2 = "=0.1.50"
+mimalloc-safe = { version = "=0.1.54", features = [
+  "skip_collect_on_exit",
+  "no_opt_arch",
+] }
 
 [target.'cfg(all(target_os = "linux", not(target_env = "ohos"), not(target_env = "musl")))'.dependencies]
-mimalloc-safe    = { version = "=0.1.54", features = ["local_dynamic_tls", "skip_collect_on_exit"] }
 libmimalloc-sys2 = "=0.1.50"
+mimalloc-safe = { version = "=0.1.54", features = [
+  "local_dynamic_tls",
+  "skip_collect_on_exit",
+  "no_opt_arch",
+] }
 
 [build-dependencies]
 napi-build = "2"
