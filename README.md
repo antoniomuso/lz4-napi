@@ -138,46 +138,46 @@ Running "Compress" suite...
 Progress: 100%
 
   lz4:
-    7 355 ops/s, ±1.73%   | 0.39% slower
+    7 499 ops/s, ±2.92%   | fastest
 
   lz4 dict:
-    6 375 ops/s, ±0.29%   | 13.66% slower
+    6 285 ops/s, ±0.33%   | 16.19% slower
 
   snappy:
-    7 384 ops/s, ±0.53%   | fastest
+    6 984 ops/s, ±0.93%   | 6.87% slower
 
   gzip:
-    444 ops/s, ±0.50%     | 93.99% slower
+    416 ops/s, ±0.46%     | 94.45% slower
 
   deflate:
-    442 ops/s, ±0.62%     | 94.01% slower
+    415 ops/s, ±0.42%     | 94.47% slower
 
   brotli:
-    6 ops/s, ±0.73%       | slowest, 99.92% slower
+    5 ops/s, ±0.09%       | slowest, 99.93% slower
 
 Finished 6 cases!
-  Fastest: snappy
+  Fastest: lz4
   Slowest: brotli
 Running "Decompress" suite...
 Progress: 100%
 
   lz4:
-    19 095 ops/s, ±1.51%   | fastest
+    27 264 ops/s, ±0.47%   | fastest
 
   lz4 dict:
-    17 644 ops/s, ±1.51%   | 7.6% slower
+    24 190 ops/s, ±0.32%   | 11.27% slower
 
   snappy:
-    14 424 ops/s, ±0.50%   | 24.46% slower
+    14 767 ops/s, ±0.43%   | 45.84% slower
 
   gzip:
-    2 442 ops/s, ±0.60%    | 87.21% slower
+    2 390 ops/s, ±0.89%    | 91.23% slower
 
   deflate:
-    2 467 ops/s, ±0.61%    | 87.08% slower
+    2 449 ops/s, ±0.52%    | 91.02% slower
 
   brotli:
-    1 659 ops/s, ±0.43%    | slowest, 91.31% slower
+    1 670 ops/s, ±0.33%    | slowest, 93.87% slower
 
 Finished 6 cases!
   Fastest: lz4
