@@ -22,10 +22,11 @@ export declare function decompressFrame(data: string | Uint8Array): Promise<Buff
 export declare function decompressFrameSync(data: string | Buffer): Buffer
 
 /**
- * Frame checksum options, threaded through to lz4_flex's `FrameInfo`.
- * Both default to `false` to match `FrameInfo::default()` - the same
- * checksum-less frames `compressFrame`/`compressFrameSync` have always
- * produced, so passing no options is a no-op change in behavior.
+ * Frame checksum options, threaded through to lz4_flex's `FrameInfo`. An
+ * unset field defers to `FrameInfo::default()` rather than a hardcoded
+ * value, so passing no options stays a no-op even if lz4_flex ever changes
+ * its own defaults - the same checksum behavior `compressFrame`/
+ * `compressFrameSync` have always had.
  */
 export interface FrameCompressOptions {
   contentChecksum?: boolean

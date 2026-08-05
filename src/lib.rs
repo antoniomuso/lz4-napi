@@ -164,10 +164,11 @@ impl<'a> ScopedTask<'a> for FrameDec {
   }
 }
 
-/// Frame checksum options, threaded through to lz4_flex's `FrameInfo`.
-/// Both default to `false` to match `FrameInfo::default()` - the same
-/// checksum-less frames `compressFrame`/`compressFrameSync` have always
-/// produced, so passing no options is a no-op change in behavior.
+/// Frame checksum options, threaded through to lz4_flex's `FrameInfo`. An
+/// unset field defers to `FrameInfo::default()` rather than a hardcoded
+/// value, so passing no options stays a no-op even if lz4_flex ever changes
+/// its own defaults - the same checksum behavior `compressFrame`/
+/// `compressFrameSync` have always had.
 #[napi(object)]
 #[derive(Default)]
 pub struct FrameCompressOptions {
@@ -177,9 +178,14 @@ pub struct FrameCompressOptions {
 
 fn frame_info_from_options(options: Option<FrameCompressOptions>) -> lz4_flex::frame::FrameInfo {
   let options = options.unwrap_or_default();
-  lz4_flex::frame::FrameInfo::new()
-    .content_checksum(options.content_checksum.unwrap_or(false))
-    .block_checksums(options.block_checksums.unwrap_or(false))
+  let mut frame_info = lz4_flex::frame::FrameInfo::default();
+  if let Some(content_checksum) = options.content_checksum {
+    frame_info = frame_info.content_checksum(content_checksum);
+  }
+  if let Some(block_checksums) = options.block_checksums {
+    frame_info = frame_info.block_checksums(block_checksums);
+  }
+  frame_info
 }
 
 struct FrameEnc {
