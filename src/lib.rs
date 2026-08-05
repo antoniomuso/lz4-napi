@@ -164,8 +164,27 @@ impl<'a> ScopedTask<'a> for FrameDec {
   }
 }
 
+/// Frame checksum options, threaded through to lz4_flex's `FrameInfo`.
+/// Both default to `false` to match `FrameInfo::default()` - the same
+/// checksum-less frames `compressFrame`/`compressFrameSync` have always
+/// produced, so passing no options is a no-op change in behavior.
+#[napi(object)]
+#[derive(Default)]
+pub struct FrameCompressOptions {
+  pub content_checksum: Option<bool>,
+  pub block_checksums: Option<bool>,
+}
+
+fn frame_info_from_options(options: Option<FrameCompressOptions>) -> lz4_flex::frame::FrameInfo {
+  let options = options.unwrap_or_default();
+  lz4_flex::frame::FrameInfo::new()
+    .content_checksum(options.content_checksum.unwrap_or(false))
+    .block_checksums(options.block_checksums.unwrap_or(false))
+}
+
 struct FrameEnc {
   data: Either<String, Uint8Array>,
+  options: Option<FrameCompressOptions>,
 }
 
 #[napi]
@@ -181,7 +200,8 @@ impl<'a> ScopedTask<'a> for FrameEnc {
 
     let mut buffer = vec![];
 
-    let mut encoder = FrameEncoder::new(&mut buffer);
+    let frame_info = frame_info_from_options(self.options.take());
+    let mut encoder = FrameEncoder::with_frame_info(frame_info, &mut buffer);
 
     encoder.write_all(data)?;
 
@@ -281,8 +301,11 @@ fn compress_sync(
 }
 
 #[napi]
-fn compress_frame(data: Either<String, Uint8Array>) -> Result<AsyncTask<FrameEnc>> {
-  let encoder = FrameEnc { data };
+fn compress_frame(
+  data: Either<String, Uint8Array>,
+  options: Option<FrameCompressOptions>,
+) -> Result<AsyncTask<FrameEnc>> {
+  let encoder = FrameEnc { data, options };
   Ok(AsyncTask::new(encoder))
 }
 
@@ -293,14 +316,18 @@ fn decompress_frame(data: Either<String, Uint8Array>) -> Result<AsyncTask<FrameD
 }
 
 #[napi]
-fn compress_frame_sync(data: Either<String, Buffer>) -> Result<Buffer> {
+fn compress_frame_sync(
+  data: Either<String, Buffer>,
+  options: Option<FrameCompressOptions>,
+) -> Result<Buffer> {
   let data_bytes: &[u8] = match data {
     Either::A(ref s) => s.as_bytes(),
     Either::B(ref b) => b,
   };
 
   let mut buffer = vec![];
-  let mut encoder = FrameEncoder::new(&mut buffer);
+  let frame_info = frame_info_from_options(options);
+  let mut encoder = FrameEncoder::with_frame_info(frame_info, &mut buffer);
   encoder
     .write_all(data_bytes)
     .map_err(|e| Error::new(napi::Status::GenericFailure, e.to_string()))?;

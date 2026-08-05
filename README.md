@@ -87,7 +87,7 @@ const uncompressedBuffer = await uncompress(compressedBuffer)
 #### `compressFrame`
 
 ```ts
-(data: Buffer | string | ArrayBuffer | Uint8Array) => Promise<Buffer>
+(data: Buffer | string | ArrayBuffer | Uint8Array, options?: { contentChecksum?: boolean; blockChecksums?: boolean }) => Promise<Buffer>
 ```
 
 #### `decompressFrame`
@@ -112,8 +112,10 @@ const uncompressedBuffer = await uncompress(compressedBuffer)
 #### `compressFrameSync`
 
 ```ts
-(data: Buffer | string | ArrayBuffer | Uint8Array) => Buffer
+(data: Buffer | string | ArrayBuffer | Uint8Array, options?: { contentChecksum?: boolean; blockChecksums?: boolean }) => Buffer
 ```
+
+Both options default to `false`, matching the existing behavior. Set `contentChecksum` to have `decompressFrame`/`decompressFrameSync` reject a corrupted frame instead of silently returning wrong bytes.
 
 #### `decompressFrameSync`
 
