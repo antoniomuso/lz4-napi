@@ -2,7 +2,16 @@ import { readFileSync } from 'fs'
 
 import test from 'ava'
 
-import { compress, uncompress, compressSync, uncompressSync, compressFrame, decompressFrame, compressFrameSync, decompressFrameSync } from '../index.js'
+import {
+  compress,
+  uncompress,
+  compressSync,
+  uncompressSync,
+  compressFrame,
+  decompressFrame,
+  compressFrameSync,
+  decompressFrameSync,
+} from '../index.js'
 
 const stringToCompress = 'adewqeqweqwewleekqwoekqwoekqwpoekqwpoekqwpoekqwpoekqwpoekqwpokeeqw'
 const dict = readFileSync('__test__/dict.bin')
@@ -94,17 +103,62 @@ test('decompressFrameSync should take all input types', (t) => {
   t.notThrows(() => decompressFrameSync(new Uint8Array(compressedValue)))
 })
 
+test('compressFrameSync defaults to no checksums', (t) => {
+  const before = Buffer.from(stringToCompress)
+  const compressed = compressFrameSync(before)
+  // FLG byte: bit 2 is content checksum, bit 4 is block checksums.
+  t.is(compressed[4] & 0b00000100, 0)
+  t.is(compressed[4] & 0b00010000, 0)
+})
+
+test('compressFrameSync can opt into a content checksum', (t) => {
+  const before = Buffer.from(stringToCompress)
+  const compressed = compressFrameSync(before, { contentChecksum: true })
+  t.not(compressed[4] & 0b00000100, 0)
+
+  const decompressed = decompressFrameSync(compressed)
+  t.is(before.toString('utf8'), decompressed.toString('utf8'))
+})
+
+test('compressFrameSync can opt into block checksums', (t) => {
+  const before = Buffer.from(stringToCompress)
+  const compressed = compressFrameSync(before, { blockChecksums: true })
+  t.not(compressed[4] & 0b00010000, 0)
+
+  const decompressed = decompressFrameSync(compressed)
+  t.is(before.toString('utf8'), decompressed.toString('utf8'))
+})
+
+test('a content checksum catches a corrupted frame content checksum trailer', (t) => {
+  const before = Buffer.from(stringToCompress)
+  const compressed = compressFrameSync(before, { contentChecksum: true })
+  // Flip a bit in the trailing content checksum itself, so decompression
+  // succeeds but the recomputed checksum won't match the (now-wrong) one
+  // stored in the frame.
+  compressed[compressed.length - 1] ^= 0xff
+  t.throws(() => decompressFrameSync(compressed))
+})
+
+test('compressFrame (async) can opt into a content checksum', async (t) => {
+  const before = Buffer.from(stringToCompress)
+  const compressed = await compressFrame(before, { contentChecksum: true })
+  t.not(compressed[4] & 0b00000100, 0)
+
+  const decompressed = await decompressFrame(compressed)
+  t.is(before.toString('utf8'), decompressed.toString('utf8'))
+})
+
 test('frame sync and async should produce compatible output', async (t) => {
   const before = Buffer.from(stringToCompress)
   const compressedSync = compressFrameSync(before)
   const compressedAsync = await compressFrame(before)
-  
+
   // Both async and sync decompression should work on sync compressed data
   const decompressedSync = decompressFrameSync(compressedSync)
   const decompressedAsync = await decompressFrame(compressedSync)
   t.is(before.toString('utf8'), decompressedSync.toString('utf8'))
   t.is(before.toString('utf8'), decompressedAsync.toString('utf8'))
-  
+
   // Both async and sync decompression should work on async compressed data
   const decompressedSync2 = decompressFrameSync(compressedAsync)
   const decompressedAsync2 = await decompressFrame(compressedAsync)
