@@ -23,10 +23,7 @@ export declare function decompressFrameSync(data: string | Buffer): Buffer
 
 /**
  * Frame checksum options, threaded through to lz4_flex's `FrameInfo`. An
- * unset field defers to `FrameInfo::default()` rather than a hardcoded
- * value, so passing no options stays a no-op even if lz4_flex ever changes
- * its own defaults - the same checksum behavior `compressFrame`/
- * `compressFrameSync` have always had.
+ * unset field defers to `FrameInfo::default()`
  */
 export interface FrameCompressOptions {
   contentChecksum?: boolean
