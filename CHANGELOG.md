@@ -1,3 +1,15 @@
+# [2.10.0](https://github.com/antoniomuso/lz4-napi/compare/v2.9.1...v2.10.0) (2026-08-16)
+
+
+### Bug Fixes
+
+* build mimalloc for the ARMv8.0 baseline on arm64 ([3cce432](https://github.com/antoniomuso/lz4-napi/commit/3cce4323cbad1b2d2e42b4a2dbe3b0b4c71e2d81)), closes [#705](https://github.com/antoniomuso/lz4-napi/issues/705)
+* don't hardcode false as the FrameInfo checksum default ([c317cfe](https://github.com/antoniomuso/lz4-napi/commit/c317cfe97700f6274157a0851a97f983a5e2de5e))
+
+
+### Features
+
+* **frame:** add contentChecksum/blockChecksums options to compressFrame(Sync) ([ac81a2f](https://github.com/antoniomuso/lz4-napi/commit/ac81a2f4e34519b1d66c706d15ef1064a2f1f3d0)), closes [#711](https://github.com/antoniomuso/lz4-napi/issues/711)
 ## [2.9.1](https://github.com/antoniomuso/lz4-napi/compare/v2.9.0...v2.9.1) (2026-07-10)
 
 
