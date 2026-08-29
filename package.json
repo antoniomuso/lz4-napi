@@ -64,7 +64,7 @@
     "@types/node": "^24.13.3",
     "@typescript-eslint/eslint-plugin": "^8.63.0",
     "@typescript-eslint/parser": "^8.63.0",
-    "ava": "^7.0.0",
+    "ava": "^8.0.1",
     "benny": "^3.7.1",
     "conventional-changelog-cli": "^5.0.0",
     "esbuild": "^0.28.1",
