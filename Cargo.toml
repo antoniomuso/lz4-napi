@@ -26,14 +26,14 @@ napi-derive = "3"
 # baseline. Android lands in the first block (target_os = "android"), and old
 # ARMv8.0 phones are exactly the hardware at risk, so both blocks need it.
 [target.'cfg(all(not(target_os = "linux"), not(target_family = "wasm")))'.dependencies]
-libmimalloc-sys2 = "=0.1.50"
+libmimalloc-sys2 = "=0.1.62"
 mimalloc-safe = { version = "=0.1.54", features = [
   "skip_collect_on_exit",
   "no_opt_arch",
 ] }
 
 [target.'cfg(all(target_os = "linux", not(target_env = "ohos"), not(target_env = "musl")))'.dependencies]
-libmimalloc-sys2 = "=0.1.50"
+libmimalloc-sys2 = "=0.1.62"
 mimalloc-safe = { version = "=0.1.54", features = [
   "local_dynamic_tls",
   "skip_collect_on_exit",
