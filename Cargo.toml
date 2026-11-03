@@ -9,6 +9,9 @@ version = "0.1.0"
 [lib]
 crate-type = ["cdylib"]
 
+[features]
+system-allocator = []
+
 [dependencies]
 lz4_flex    = "0.13"
 napi        = { version = "3", features = ["napi5", "serde-json"] }

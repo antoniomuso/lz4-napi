@@ -26,6 +26,24 @@ concurrency:
   # Keep release runs alive while they wait for npm environment approval.
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
+  test-system-allocator:
+    name: Test system allocator - Linux x64 - node@24
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: yarn
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install dependencies
+        run: yarn install --mode=skip-build
+      - name: Build with the system allocator
+        run: yarn build:release --features system-allocator
+      - name: Test bindings
+        run: yarn test
+      - name: Check async buffer memory
+        run: node scripts/check-async-memory.cjs
   build:
     strategy:
       fail-fast: false

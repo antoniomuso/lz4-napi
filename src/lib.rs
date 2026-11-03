@@ -16,6 +16,7 @@ use napi::{
 };
 
 #[cfg(all(
+  not(feature = "system-allocator"),
   not(target_family = "wasm"),
   not(target_env = "ohos"),
   not(target_env = "musl")

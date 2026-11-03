@@ -21,6 +21,7 @@
 <!-- toc -->
 
 - [Installation](#installation)
+  - [Building with the system allocator](#building-with-the-system-allocator)
 - [Usage](#usage)
   - [Compress data](#compress-data)
   - [Uncompress data](#uncompress-data)
@@ -56,6 +57,33 @@ Using Yarn:
 
 ```sh
 yarn add lz4-napi
+```
+
+### Building with the system allocator
+
+For workloads that repeatedly compress or decompress large buffers asynchronously,
+you can build the native addon with Rust's system allocator:
+
+```sh
+yarn install
+yarn build:release --features system-allocator
+```
+
+This disables the addon's custom mimalloc allocator. Async output buffers are
+allocated on a libuv worker and eventually released by Node.js on another thread;
+mimalloc can retain those freed allocations until the owning worker collects them.
+The system allocator build avoids that mimalloc retention path while keeping the
+codec work on libuv workers. The JavaScript API and compressed format are unchanged.
+
+This is a compile-time option for source builds, not an environment variable or an
+option that changes an already installed npm binary. Default builds continue to
+use the existing allocator selection. Memory usage and throughput depend on the
+platform and workload, so benchmark the resulting build for your application.
+
+After building, run the async memory regression check with:
+
+```sh
+node scripts/check-async-memory.cjs
 ```
 
 ## Usage
